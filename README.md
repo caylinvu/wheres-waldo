@@ -14,3 +14,6 @@ A game, similar to Where's Waldo, where the user is given a large image which co
 - To practice tying a frontend client to a backend server
 - More practice with all frontend and backend concepts learned
 - Work with image coordinates at different screen sizes
+
+## Image Credit
+- All 3 images (The Crumbling Creek, Midnight Metropolis, and Concrete Jungle) by Samuel Hayward (https://www.srhillustration.com/)
