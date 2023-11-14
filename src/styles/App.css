@@ -91,8 +91,13 @@
 
 /* ~~~~~~~~~~GAME PAGE~~~~~~~~~~ */
 
+.game-page {
+  display: flex;
+}
+
 .main-img {
   width: 100%;
+  height: auto;
   cursor: crosshair;
 }
 

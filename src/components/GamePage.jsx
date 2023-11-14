@@ -88,6 +88,12 @@ function GamePage() {
     };
   });
 
+  // if clicked coord (converted to nat) is greater than or equal to item coord - 40 AND less than or equal to item coord + 40
+  // on x AND y axis
+  // then success
+
+  // otherwise fail
+
   return (
     <div className="game-page">
       <img onClick={handleClick} className="main-img" src="/the-crumbling-creek.png" alt="" />

@@ -15,7 +15,7 @@ export default App;
 
 // make pop up target not show outside of game image
 
-// remove target when click away or select item
+// handle selecting an item
 
 // figure out coordinates of items in images
 
@@ -34,3 +34,5 @@ export default App;
 // credit image artist!!!
 
 // make responsive!!!
+
+// does targetBox and dropdown need to be in state???
