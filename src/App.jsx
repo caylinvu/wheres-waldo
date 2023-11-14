@@ -13,8 +13,6 @@ function App() {
 
 export default App;
 
-// set up react router
-
 // set up home page view of 3 games to choose from
 
 // create functionality to pop the targeting box and dropdown menu when clicking

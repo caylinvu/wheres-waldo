@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './HomePage';
 import GamePage from './GamePage';
 import LeaderboardPage from './LeaderboardPage';
+import AboutPage from './AboutPage';
 
 function Router() {
   const router = createBrowserRouter([
@@ -13,6 +14,7 @@ function Router() {
         { path: '/', element: <HomePage /> },
         { path: '/game/:gameId', element: <GamePage /> },
         { path: '/leaderboard', element: <LeaderboardPage /> },
+        { path: '/about', element: <AboutPage /> },
       ],
     },
   ]);
