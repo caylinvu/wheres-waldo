@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function GamePage() {
   const [fakeList, setFakeList] = useState([
@@ -40,31 +40,52 @@ function GamePage() {
 
   const handleClick = (e) => {
     let targetBox = document.getElementById('target-box');
-    targetBox.style.display = 'block';
-    targetBox.style.position = 'absolute';
-    targetBox.style.left = e.pageX - 40 + 'px';
-    targetBox.style.top = e.pageY - 40 + 'px';
-
     let dropdown = document.getElementById('dropdown');
-    dropdown.style.display = 'block';
-    dropdown.style.position = 'absolute';
 
-    let natX = convertToNatXCoord(e);
+    if (targetBox.style.display === 'none') {
+      targetBox.style.display = 'block';
+      targetBox.style.position = 'absolute';
+      targetBox.style.left = e.pageX - 40 + 'px';
+      targetBox.style.top = e.pageY - 40 + 'px';
 
-    if (natX > 2378) {
-      dropdown.style.left = e.pageX - 105 + 'px';
+      dropdown.style.display = 'block';
+      dropdown.style.position = 'absolute';
+
+      let natX = convertToNatXCoord(e);
+
+      if (natX > 2378) {
+        dropdown.style.left = e.pageX - 105 + 'px';
+      } else {
+        dropdown.style.left = e.pageX + 10 + 'px';
+      }
+
+      let natY = convertToNatYCoord(e);
+
+      if (natY > 3529) {
+        dropdown.style.top = e.pageY - 120 + 'px';
+      } else {
+        dropdown.style.top = e.pageY + 10 + 'px';
+      }
     } else {
-      dropdown.style.left = e.pageX + 10 + 'px';
-    }
-
-    let natY = convertToNatYCoord(e);
-
-    if (natY > 3529) {
-      dropdown.style.top = e.pageY - 120 + 'px';
-    } else {
-      dropdown.style.top = e.pageY + 10 + 'px';
+      targetBox.style.display = 'none';
+      dropdown.style.display = 'none';
     }
   };
+
+  useEffect(() => {
+    function handleResize() {
+      let targetBox = document.getElementById('target-box');
+      let dropdown = document.getElementById('dropdown');
+      targetBox.style.display = 'none';
+      dropdown.style.display = 'none';
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className="game-page">

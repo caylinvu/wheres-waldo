@@ -13,9 +13,7 @@ function App() {
 
 export default App;
 
-// create functionality to pop the targeting box and dropdown menu when clicking
-
-// if resizing, remove target
+// make click on target box remove target
 
 // make pop up target not show outside of game image
 
