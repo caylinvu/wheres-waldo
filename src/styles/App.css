@@ -1,28 +1,90 @@
+/* ~~~~~~~~~~HEADER~~~~~~~~~~ */
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 20px;
+  padding: 20px 25px;
 }
 
 .header h1 {
-  font-size: 26px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 400;
 }
 
 .nav {
   display: flex;
   gap: 25px;
-  font-size: 17px;
+  font-size: 17.5px;
 }
 
 .header a {
   cursor: pointer;
   padding: 7px 10px;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .header a:hover {
   background-color: rgb(109, 65, 86);
   transition: background-color 0.5s;
+}
+
+/* ~~~~~~~~~~HOME PAGE~~~~~~~~~~ */
+
+.home-page {
+  text-align: center;
+  margin: 0 10px 20px;
+}
+
+.home-page h2 {
+  font-weight: 500;
+  margin: 25px 0;
+  font-size: 28px;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.game-container > div {
+  width: 350px;
+  background-color: rgb(109, 65, 86);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.game-img {
+  height: 300px;
+}
+
+.game-img img {
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.game-text {
+  padding: 15px 10px;
+  font-size: 18px;
+}
+
+.game-text a {
+  padding: 8px 20px;
+  margin: 10px 0 5px;
+  background-color: rgb(255, 172, 125);
+  color: rgb(87, 52, 69);
+  font-weight: 500;
+  font-size: 17px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.game-text a:hover {
+  filter: brightness(90%);
+  transition: filter 0.2s;
 }

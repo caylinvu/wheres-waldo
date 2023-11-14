@@ -13,8 +13,6 @@ function App() {
 
 export default App;
 
-// set up home page view of 3 games to choose from
-
 // create functionality to pop the targeting box and dropdown menu when clicking
 
 // remove target when click away or select item
@@ -34,3 +32,5 @@ export default App;
 // show leaderboard
 
 // credit image artist!!!
+
+// make responsive!!!
