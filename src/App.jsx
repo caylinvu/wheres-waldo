@@ -13,8 +13,6 @@ function App() {
 
 export default App;
 
-// make click on target box remove target
-
 // make pop up target not show outside of game image
 
 // remove target when click away or select item

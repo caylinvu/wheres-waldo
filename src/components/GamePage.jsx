@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 
 function GamePage() {
+  const [targetBox, setTargetBox] = useState(null);
+  const [dropdown, setDropdown] = useState(null);
   const [fakeList, setFakeList] = useState([
     {
       name: 'Item 1',
@@ -12,6 +14,11 @@ function GamePage() {
       name: 'Item 3',
     },
   ]);
+
+  useEffect(() => {
+    setTargetBox(document.getElementById('target-box'));
+    setDropdown(document.getElementById('dropdown'));
+  }, []);
 
   const showCoords = (e) => {
     const x = e.pageX - e.target.offsetLeft;
@@ -39,10 +46,7 @@ function GamePage() {
   };
 
   const handleClick = (e) => {
-    let targetBox = document.getElementById('target-box');
-    let dropdown = document.getElementById('dropdown');
-
-    if (targetBox.style.display === 'none') {
+    if (targetBox.style.display === 'none' || targetBox.style.display === '') {
       targetBox.style.display = 'block';
       targetBox.style.position = 'absolute';
       targetBox.style.left = e.pageX - 40 + 'px';
@@ -67,30 +71,29 @@ function GamePage() {
         dropdown.style.top = e.pageY + 10 + 'px';
       }
     } else {
-      targetBox.style.display = 'none';
-      dropdown.style.display = 'none';
+      hideTargetBox();
     }
   };
 
-  useEffect(() => {
-    function handleResize() {
-      let targetBox = document.getElementById('target-box');
-      let dropdown = document.getElementById('dropdown');
-      targetBox.style.display = 'none';
-      dropdown.style.display = 'none';
-    }
+  const hideTargetBox = () => {
+    targetBox.style.display = 'none';
+    dropdown.style.display = 'none';
+  };
 
-    window.addEventListener('resize', handleResize);
+  useEffect(() => {
+    window.addEventListener('resize', hideTargetBox);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', hideTargetBox);
     };
-  }, []);
+  });
 
   return (
     <div className="game-page">
       <img onClick={handleClick} className="main-img" src="/the-crumbling-creek.png" alt="" />
-      <div id="target-box">•</div>
+      <div onClick={hideTargetBox} id="target-box">
+        •
+      </div>
       <div id="dropdown">
         {fakeList.map((obj) => {
           return (
