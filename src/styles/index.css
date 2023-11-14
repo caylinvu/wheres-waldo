@@ -10,6 +10,11 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+#root {
+  position: relative;
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
   color: white;

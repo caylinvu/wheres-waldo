@@ -30,7 +30,11 @@ function GamePage() {
     console.log('img: ' + e.target.width + ', ' + e.target.height);
     console.log('actual coords: ' + actualX + ', ' + actualY);
     console.log('natural: ' + e.target.naturalWidth + ', ' + e.target.naturalHeight);
-    // console.log(e);
+
+    console.log('page: ' + e.pageX + ', ' + e.pageY);
+    console.log('client: ' + e.clientX + ', ' + e.clientY);
+
+    console.log(e);
   };
 
   const convertToNatXCoord = (e) => {
@@ -73,6 +77,8 @@ function GamePage() {
     } else {
       hideTargetBox();
     }
+
+    showCoords(e);
   };
 
   const hideTargetBox = () => {
