@@ -74,7 +74,8 @@
 .game-text a {
   padding: 8px 20px;
   margin: 10px 0 5px;
-  background-color: rgb(255, 172, 125);
+  background-color: rgb(206, 168, 255);
+  /* background-color: rgb(255, 172, 125); */
   color: rgb(87, 52, 69);
   font-weight: 500;
   font-size: 17px;
@@ -109,4 +110,21 @@
   vertical-align: middle;
   line-height: 80px;
   cursor: crosshair;
+}
+
+#dropdown {
+  display: none;
+  background-color: rgb(94, 55, 74);
+  border-radius: 7px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  padding: 10px 25px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: rgb(109, 65, 86);
 }

@@ -15,6 +15,10 @@ export default App;
 
 // create functionality to pop the targeting box and dropdown menu when clicking
 
+// if resizing, remove target
+
+// make pop up target not show outside of game image
+
 // remove target when click away or select item
 
 // figure out coordinates of items in images
