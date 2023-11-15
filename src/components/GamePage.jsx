@@ -1,52 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function GamePage() {
   const [targetBox, setTargetBox] = useState(null);
   const [dropdown, setDropdown] = useState(null);
   const [currentX, setCurrentX] = useState(null);
   const [currentY, setCurrentY] = useState(null);
-  const [items, setItems] = useState([
-    {
-      name: 'Monkey',
-      image: '/1-monkey.png',
-      coordinates: {
-        x: 1486,
-        y: 1859,
-      },
-    },
-    {
-      name: 'Cat',
-      image: '/1-cat.png',
-      coordinates: {
-        x: 2355,
-        y: 3696,
-      },
-    },
-    {
-      name: 'Dwarf',
-      image: '/1-dwarf.png',
-      coordinates: {
-        x: 72,
-        y: 2858,
-      },
-    },
-    {
-      name: 'Witch',
-      image: '/1-witch.png',
-      coordinates: {
-        x: 2375,
-        y: 1925,
-      },
-    },
-    {
-      name: 'Fish man',
-      image: '/1-fishman.png',
-      coordinates: {
-        x: 873,
-        y: 1256,
-      },
-    },
-  ]);
+  const location = useLocation();
 
   useEffect(() => {
     setTargetBox(document.getElementById('target-box'));
@@ -99,12 +59,30 @@ function GamePage() {
       let natY = convertToNatYCoord(e);
       setCurrentY(natY);
 
+      let remainingItems = location.state.items.filter((obj) => !obj.found);
+
       if (
         e.target.height < 680 &&
         natY > e.target.naturalHeight * 0.38 &&
         natY < e.target.naturalHeight * 0.61
       ) {
-        dropdown.style.top = e.pageY - 160 + 'px';
+        switch (remainingItems.length) {
+          case 5:
+            dropdown.style.top = e.pageY - 160 + 'px';
+            break;
+          case 4:
+            dropdown.style.top = e.pageY - 160 + 32 + 'px';
+            break;
+          case 3:
+            dropdown.style.top = e.pageY - 160 + 32 + 32 + 'px';
+            break;
+          case 2:
+            dropdown.style.top = e.pageY - 160 + 32 + 32 + 32 + 'px';
+            break;
+          case 1:
+            dropdown.style.top = e.pageY - 160 + 32 + 32 + 32 + 32 + 'px';
+            break;
+        }
       } else if (
         e.target.height < 680 &&
         natY > e.target.naturalHeight * 0.21 &&
@@ -116,9 +94,41 @@ function GamePage() {
         natY >= e.target.naturalHeight * 0.61 &&
         natY < e.target.naturalHeight * 0.76
       ) {
-        dropdown.style.top = e.pageY - 260 + 'px';
+        switch (remainingItems.length) {
+          case 5:
+            dropdown.style.top = e.pageY - 260 + 'px';
+            break;
+          case 4:
+            dropdown.style.top = e.pageY - 260 + 64 + 'px';
+            break;
+          case 3:
+            dropdown.style.top = e.pageY - 260 + 64 + 64 + 'px';
+            break;
+          case 2:
+            dropdown.style.top = e.pageY - 260 + 64 + 64 + 64 + 'px';
+            break;
+          case 1:
+            dropdown.style.top = e.pageY - 260 + 64 + 64 + 64 + 64 + 'px';
+            break;
+        }
       } else if (natY > e.target.naturalHeight / 2) {
-        dropdown.style.top = e.pageY - 325 + 'px';
+        switch (remainingItems.length) {
+          case 5:
+            dropdown.style.top = e.pageY - 325 + 'px';
+            break;
+          case 4:
+            dropdown.style.top = e.pageY - 325 + 64 + 'px';
+            break;
+          case 3:
+            dropdown.style.top = e.pageY - 325 + 64 + 64 + 'px';
+            break;
+          case 2:
+            dropdown.style.top = e.pageY - 325 + 64 + 64 + 64 + 'px';
+            break;
+          case 1:
+            dropdown.style.top = e.pageY - 325 + 64 + 64 + 64 + 64 + 'px';
+            break;
+        }
       } else {
         dropdown.style.top = e.pageY + 10 + 'px';
       }
@@ -126,7 +136,7 @@ function GamePage() {
       hideTargetBox();
     }
 
-    showCoords(e);
+    // showCoords(e);
   };
 
   const hideTargetBox = () => {
@@ -163,7 +173,7 @@ function GamePage() {
   };
 
   const checkWin = () => {
-    let remainingItems = items.filter((obj) => !obj.found);
+    let remainingItems = location.state.items.filter((obj) => !obj.found);
     if (remainingItems.length < 1) {
       console.log('YOU WINNNNN GAME OVER!!!!');
     }
@@ -171,12 +181,12 @@ function GamePage() {
 
   return (
     <div className="game-page">
-      <img onClick={handleClick} className="main-img" src="/the-crumbling-creek.png" alt="" />
+      <img onClick={handleClick} className="main-img" src={location.state.imgURL} alt="" />
       <div onClick={hideTargetBox} id="target-box">
         •
       </div>
       <div id="dropdown">
-        {items
+        {location.state.items
           .filter((obj) => !obj.found)
           .map((obj) => {
             return (

@@ -25,9 +25,15 @@ export default App;
 
 // pass parameters depending on game
 
-// adjust dropdown based on screen size (maybe change to only 3 items per game)
+// exiting to home resets game!!
 
 // make text inside of target and dropdown untargetable
+
+// edit dropdown to adjust placement based on # of items remaining (only Y axis lower half)
+// RESTRUCTURE whole dropdown system so that it is based on a big switch statement
+
+// if smaller screen add larger hit range
+// -- maybe change to add +/- 40 to the actual coordinates and then convert to natural
 
 // add timer to game
 
