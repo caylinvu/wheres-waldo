@@ -3,15 +3,48 @@ import { useState, useEffect } from 'react';
 function GamePage() {
   const [targetBox, setTargetBox] = useState(null);
   const [dropdown, setDropdown] = useState(null);
-  const [fakeList, setFakeList] = useState([
+  const [currentX, setCurrentX] = useState(null);
+  const [currentY, setCurrentY] = useState(null);
+  const [items, setItems] = useState([
     {
-      name: 'Item 1',
+      name: 'Monkey',
+      image: '/1-monkey.png',
+      coordinates: {
+        x: 1486,
+        y: 1859,
+      },
     },
     {
-      name: 'Item 2',
+      name: 'Cat',
+      image: '/1-cat.png',
+      coordinates: {
+        x: 2355,
+        y: 3696,
+      },
     },
     {
-      name: 'Item 3',
+      name: 'Dwarf',
+      image: '/1-dwarf.png',
+      coordinates: {
+        x: 72,
+        y: 2858,
+      },
+    },
+    {
+      name: 'Witch',
+      image: '/1-witch.png',
+      coordinates: {
+        x: 2375,
+        y: 1925,
+      },
+    },
+    {
+      name: 'Fish man',
+      image: '/1-fishman.png',
+      coordinates: {
+        x: 873,
+        y: 1256,
+      },
     },
   ]);
 
@@ -30,11 +63,6 @@ function GamePage() {
     console.log('img: ' + e.target.width + ', ' + e.target.height);
     console.log('actual coords: ' + actualX + ', ' + actualY);
     console.log('natural: ' + e.target.naturalWidth + ', ' + e.target.naturalHeight);
-
-    console.log('page: ' + e.pageX + ', ' + e.pageY);
-    console.log('client: ' + e.clientX + ', ' + e.clientY);
-
-    console.log(e);
   };
 
   const convertToNatXCoord = (e) => {
@@ -60,6 +88,7 @@ function GamePage() {
       dropdown.style.position = 'absolute';
 
       let natX = convertToNatXCoord(e);
+      setCurrentX(natX);
 
       if (natX > 2378) {
         dropdown.style.left = e.pageX - 105 + 'px';
@@ -68,6 +97,7 @@ function GamePage() {
       }
 
       let natY = convertToNatYCoord(e);
+      setCurrentY(natY);
 
       if (natY > 3529) {
         dropdown.style.top = e.pageY - 120 + 'px';
@@ -78,7 +108,7 @@ function GamePage() {
       hideTargetBox();
     }
 
-    showCoords(e);
+    // showCoords(e);
   };
 
   const hideTargetBox = () => {
@@ -97,6 +127,30 @@ function GamePage() {
   // if clicked coord (converted to nat) is greater than or equal to item coord - 40 AND less than or equal to item coord + 40
   // on x AND y axis
   // then success
+  const handleSelectItem = (item) => {
+    if (
+      currentX >= item.coordinates.x - 50 &&
+      currentX < item.coordinates.x + 50 &&
+      currentY >= item.coordinates.y - 50 &&
+      currentY < item.coordinates.y + 50
+    ) {
+      item.found = true;
+      hideTargetBox();
+      checkWin();
+      console.log('success!!!');
+    } else {
+      hideTargetBox();
+      console.log('try again!!!');
+    }
+  };
+
+  const checkWin = () => {
+    let remainingItems = items.filter((obj) => !obj.found);
+    console.log(remainingItems);
+    if (remainingItems.length < 1) {
+      console.log('YOU WINNNNN GAME OVER!!!!');
+    }
+  };
 
   // otherwise fail
 
@@ -107,13 +161,16 @@ function GamePage() {
         •
       </div>
       <div id="dropdown">
-        {fakeList.map((obj) => {
-          return (
-            <p className="dropdown-item" key={obj.name}>
-              {obj.name}
-            </p>
-          );
-        })}
+        {items
+          .filter((obj) => !obj.found)
+          .map((obj) => {
+            return (
+              <div className="dropdown-item" key={obj.name} onClick={() => handleSelectItem(obj)}>
+                <img src={obj.image} alt="" />
+                <p>{obj.name}</p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

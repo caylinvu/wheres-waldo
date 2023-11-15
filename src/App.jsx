@@ -13,17 +13,17 @@ function App() {
 
 export default App;
 
-// make pop up target not show outside of game image
+// maybe edit item photos to be zoomed in (crop smaller)
 
 // handle selecting an item
-
-// figure out coordinates of items in images
 
 // create backend to store images/coordinates
 
 // validate coordinates
 
 // implement selecting, validating, and returning appropriate message
+
+// pass parameters depending on game
 
 // add timer to game
 
