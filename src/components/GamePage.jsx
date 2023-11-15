@@ -90,8 +90,8 @@ function GamePage() {
       let natX = convertToNatXCoord(e);
       setCurrentX(natX);
 
-      if (natX > 2378) {
-        dropdown.style.left = e.pageX - 105 + 'px';
+      if (natX > e.target.naturalWidth / 2) {
+        dropdown.style.left = e.pageX - 155 + 'px';
       } else {
         dropdown.style.left = e.pageX + 10 + 'px';
       }
@@ -99,8 +99,26 @@ function GamePage() {
       let natY = convertToNatYCoord(e);
       setCurrentY(natY);
 
-      if (natY > 3529) {
-        dropdown.style.top = e.pageY - 120 + 'px';
+      if (
+        e.target.height < 680 &&
+        natY > e.target.naturalHeight * 0.38 &&
+        natY < e.target.naturalHeight * 0.61
+      ) {
+        dropdown.style.top = e.pageY - 160 + 'px';
+      } else if (
+        e.target.height < 680 &&
+        natY > e.target.naturalHeight * 0.21 &&
+        natY <= e.target.naturalHeight * 0.38
+      ) {
+        dropdown.style.top = e.pageY - 60 + 'px';
+      } else if (
+        e.target.height < 680 &&
+        natY >= e.target.naturalHeight * 0.61 &&
+        natY < e.target.naturalHeight * 0.76
+      ) {
+        dropdown.style.top = e.pageY - 260 + 'px';
+      } else if (natY > e.target.naturalHeight / 2) {
+        dropdown.style.top = e.pageY - 325 + 'px';
       } else {
         dropdown.style.top = e.pageY + 10 + 'px';
       }
@@ -108,7 +126,7 @@ function GamePage() {
       hideTargetBox();
     }
 
-    // showCoords(e);
+    showCoords(e);
   };
 
   const hideTargetBox = () => {
@@ -129,9 +147,9 @@ function GamePage() {
   // then success
   const handleSelectItem = (item) => {
     if (
-      currentX >= item.coordinates.x - 50 &&
+      currentX > item.coordinates.x - 50 &&
       currentX < item.coordinates.x + 50 &&
-      currentY >= item.coordinates.y - 50 &&
+      currentY > item.coordinates.y - 50 &&
       currentY < item.coordinates.y + 50
     ) {
       item.found = true;
@@ -146,13 +164,10 @@ function GamePage() {
 
   const checkWin = () => {
     let remainingItems = items.filter((obj) => !obj.found);
-    console.log(remainingItems);
     if (remainingItems.length < 1) {
       console.log('YOU WINNNNN GAME OVER!!!!');
     }
   };
-
-  // otherwise fail
 
   return (
     <div className="game-page">
