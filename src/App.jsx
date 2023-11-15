@@ -15,10 +15,6 @@ export default App;
 
 // create backend to store images/coordinates
 
-// maybe edit item photos to be zoomed in (crop smaller)
-
-// handle selecting an item
-
 // validate coordinates
 
 // implement selecting, validating, and returning appropriate message
@@ -33,7 +29,8 @@ export default App;
 // RESTRUCTURE whole dropdown system so that it is based on a big switch statement
 
 // if smaller screen add larger hit range
-// -- maybe change to add +/- 40 to the actual coordinates and then convert to natural
+// -- maybe change to add +/- 40-50 to the actual coordinates and then convert to natural
+// convert 50 local coords to nat and use in handleSelectItem
 
 // add timer to game
 
