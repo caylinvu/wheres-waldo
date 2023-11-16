@@ -1,8 +1,29 @@
 import './styles/App.css';
 import Header from './components/Header';
 import { Outlet } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    const getGameData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/games');
+        if (!response.ok) {
+          throw new Error(`This is an HTTP error: The status is ${response.status}`);
+        }
+        const gameData = await response.json();
+        console.log(gameData);
+        setGames(gameData);
+      } catch (err) {
+        setGames([]);
+        console.log(err);
+      }
+    };
+    getGameData();
+  }, []);
+
   return (
     <>
       <Header />
@@ -13,7 +34,7 @@ function App() {
 
 export default App;
 
-// create backend to store images/coordinates
+// hook front end up to backend
 
 // validate coordinates
 
@@ -32,6 +53,8 @@ export default App;
 // -- maybe change to add +/- 40-50 to the actual coordinates and then convert to natural
 // convert 50 local coords to nat and use in handleSelectItem
 
+// display remaining items in header
+
 // add timer to game
 
 // display time and request name in pop up
@@ -43,3 +66,5 @@ export default App;
 // make responsive!!!
 
 // does targetBox and dropdown need to be in state???
+
+// add footer????

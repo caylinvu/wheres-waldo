@@ -162,7 +162,7 @@ function HomePage() {
           </div>
           <div className="game-text">
             <p>Concrete Jungle</p>
-            <Link to="/game/1" state={{ imgURL: '/concrete-jungle.png', items: items3 }}>
+            <Link to="/game/3" state={{ imgURL: '/concrete-jungle.png', items: items3 }}>
               Start Game
             </Link>
           </div>
