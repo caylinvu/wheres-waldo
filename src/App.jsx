@@ -33,8 +33,6 @@ function App() {
 
 export default App;
 
-// maybe need to hook up local storage to keep current game
-
 // add pop up messages when click on item
 
 // add popup to add name to leaderboard when game is over

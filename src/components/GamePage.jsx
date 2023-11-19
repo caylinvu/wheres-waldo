@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useOutletContext } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function GamePage() {
   const [targetBox, setTargetBox] = useState(null);
@@ -14,17 +14,17 @@ function GamePage() {
     setDropdown(document.getElementById('dropdown'));
   }, []);
 
-  const showCoords = (e) => {
-    const x = e.pageX - e.target.offsetLeft;
-    const y = e.pageY - e.target.offsetTop;
-    const actualX = Math.round((x / e.target.width) * e.target.naturalWidth);
-    const actualY = Math.round((y / e.target.height) * e.target.naturalHeight);
+  // const showCoords = (e) => {
+  //   const x = e.pageX - e.target.offsetLeft;
+  //   const y = e.pageY - e.target.offsetTop;
+  //   const actualX = Math.round((x / e.target.width) * e.target.naturalWidth);
+  //   const actualY = Math.round((y / e.target.height) * e.target.naturalHeight);
 
-    console.log('img coords: ' + x + ', ' + y);
-    console.log('img: ' + e.target.width + ', ' + e.target.height);
-    console.log('actual coords: ' + actualX + ', ' + actualY);
-    console.log('natural: ' + e.target.naturalWidth + ', ' + e.target.naturalHeight);
-  };
+  //   console.log('img coords: ' + x + ', ' + y);
+  //   console.log('img: ' + e.target.width + ', ' + e.target.height);
+  //   console.log('actual coords: ' + actualX + ', ' + actualY);
+  //   console.log('natural: ' + e.target.naturalWidth + ', ' + e.target.naturalHeight);
+  // };
 
   const convertToNatXCoord = (e) => {
     const x = e.pageX - e.target.offsetLeft;

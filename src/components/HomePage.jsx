@@ -1,4 +1,4 @@
-import { Link, useOutletContext, useNavigate } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 
 function HomePage() {
   const { games } = useOutletContext();
