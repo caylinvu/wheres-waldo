@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [games, setGames] = useState([]);
-  const [currentGame, setCurrentGame] = useState(null);
 
   useEffect(() => {
     const getGameData = async () => {
@@ -15,7 +14,6 @@ function App() {
           throw new Error(`This is an HTTP error: The status is ${response.status}`);
         }
         const gameData = await response.json();
-        console.log(gameData);
         setGames(gameData);
       } catch (err) {
         setGames([]);
@@ -27,8 +25,8 @@ function App() {
 
   return (
     <>
-      <Header currentGame={currentGame} setCurrentGame={setCurrentGame} />
-      <Outlet context={{ games, currentGame, setCurrentGame }} />
+      <Header />
+      <Outlet context={{ games }} />
     </>
   );
 }
@@ -55,6 +53,8 @@ export default App;
 // convert 50 local coords to nat and use in handleSelectItem
 
 // display remaining items in header
+
+// make things not selectable
 
 // add timer to game
 

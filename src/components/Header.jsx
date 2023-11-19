@@ -1,17 +1,24 @@
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-function Header({ currentGame, setCurrentGame }) {
-  const removeCurrentGame = () => {
-    setCurrentGame(null);
-  };
+function Header() {
+  const [isPlaying, setIsPlaying] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.includes('/game')) {
+      setIsPlaying(true);
+    } else {
+      setIsPlaying(false);
+    }
+  }, [location]);
 
   return (
     <div className="header">
-      <Link to="/" onClick={removeCurrentGame}>
+      <Link to="/">
         <h1>Find the Things!</h1>
       </Link>
-      {!currentGame ? (
+      {!isPlaying ? (
         <div className="nav">
           <Link to="/leaderboard">
             <p>Leaderboard</p>
@@ -20,25 +27,9 @@ function Header({ currentGame, setCurrentGame }) {
             <p>About</p>
           </Link>
         </div>
-      ) : (
-        <div className="items-to-find">
-          {currentGame.items.map((item) => {
-            return (
-              <div key={item._id} className="item">
-                <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" />
-                <p>{item.name}</p>
-              </div>
-            );
-          })}
-        </div>
-      )}
+      ) : null}
     </div>
   );
 }
-
-Header.propTypes = {
-  currentGame: PropTypes.object,
-  setCurrentGame: PropTypes.func,
-};
 
 export default Header;

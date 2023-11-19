@@ -97,6 +97,11 @@
 .items-to-find {
   display: flex;
   gap: 20px;
+  position: absolute;
+  padding: 20px 25px;
+  top: 0;
+  right: 0;
+  z-index: 15;
 }
 
 .item {
@@ -113,6 +118,11 @@
 .item img:hover {
   transform: scale(3) translateY(10px);
   transition: transform 0.2s;
+}
+
+.found {
+  text-decoration: line-through;
+  filter: brightness(80%);
 }
 
 /* ~~~~~~~~~~GAME PAGE~~~~~~~~~~ */

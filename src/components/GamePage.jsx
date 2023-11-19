@@ -6,17 +6,12 @@ function GamePage() {
   const [dropdown, setDropdown] = useState(null);
   const [currentX, setCurrentX] = useState(null);
   const [currentY, setCurrentY] = useState(null);
-  const { setCurrentGame } = useOutletContext();
   const { state } = useLocation();
 
   useEffect(() => {
     setTargetBox(document.getElementById('target-box'));
     setDropdown(document.getElementById('dropdown'));
   }, []);
-
-  useEffect(() => {
-    setCurrentGame(state.game);
-  });
 
   const showCoords = (e) => {
     const x = e.pageX - e.target.offsetLeft;
@@ -167,6 +162,8 @@ function GamePage() {
       currentY > item.coords.y - 50 &&
       currentY < item.coords.y + 50
     ) {
+      const element = document.getElementById(item._id);
+      element.classList.add('found');
       item.found = true;
       hideTargetBox();
       checkWin();
@@ -206,6 +203,16 @@ function GamePage() {
               </div>
             );
           })}
+      </div>
+      <div className="items-to-find">
+        {state.game.items.map((item) => {
+          return (
+            <div key={item._id} className="item" id={item._id}>
+              <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" />
+              <p>{item.name}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
