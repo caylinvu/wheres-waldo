@@ -35,8 +35,6 @@ export default App;
 
 // maybe need to hook up local storage to keep current game
 
-// add items to look for in header and stick header to top when scroll???
-
 // add pop up messages when click on item
 
 // add popup to add name to leaderboard when game is over
@@ -63,6 +61,8 @@ export default App;
 // show leaderboard
 
 // credit image artist!!!
+
+// make scroll to top when change route
 
 // make responsive!!!
 

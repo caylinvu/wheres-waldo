@@ -6,6 +6,7 @@ function GamePage() {
   const [dropdown, setDropdown] = useState(null);
   const [currentX, setCurrentX] = useState(null);
   const [currentY, setCurrentY] = useState(null);
+  const [remainingItems, setRemainingItems] = useState(5);
   const { state } = useLocation();
 
   useEffect(() => {
@@ -59,14 +60,14 @@ function GamePage() {
       let natY = convertToNatYCoord(e);
       setCurrentY(natY);
 
-      let remainingItems = state.game.items.filter((item) => !item.found);
+      console.log(remainingItems);
 
       if (
         e.target.height < 680 &&
         natY > e.target.naturalHeight * 0.38 &&
         natY < e.target.naturalHeight * 0.61
       ) {
-        switch (remainingItems.length) {
+        switch (remainingItems) {
           case 5:
             dropdown.style.top = e.pageY - 160 + 'px';
             break;
@@ -94,7 +95,7 @@ function GamePage() {
         natY >= e.target.naturalHeight * 0.61 &&
         natY < e.target.naturalHeight * 0.76
       ) {
-        switch (remainingItems.length) {
+        switch (remainingItems) {
           case 5:
             dropdown.style.top = e.pageY - 260 + 'px';
             break;
@@ -112,7 +113,7 @@ function GamePage() {
             break;
         }
       } else if (natY > e.target.naturalHeight / 2) {
-        switch (remainingItems.length) {
+        switch (remainingItems) {
           case 5:
             dropdown.style.top = e.pageY - 325 + 'px';
             break;
@@ -162,11 +163,12 @@ function GamePage() {
       currentY > item.coords.y - 50 &&
       currentY < item.coords.y + 50
     ) {
-      const element = document.getElementById(item._id);
+      const element = document.getElementById('item' + item._id);
       element.classList.add('found');
-      item.found = true;
+      const dropdownElement = document.getElementById('dropdown-item' + item._id);
+      dropdownElement.classList.add('hidden');
+      setRemainingItems(remainingItems - 1);
       hideTargetBox();
-      checkWin();
       console.log('success!!!');
     } else {
       hideTargetBox();
@@ -174,12 +176,11 @@ function GamePage() {
     }
   };
 
-  const checkWin = () => {
-    let remainingItems = state.game.items.filter((item) => !item.found);
-    if (remainingItems.length < 1) {
+  useEffect(() => {
+    if (remainingItems < 1) {
       console.log('YOU WINNNNN GAME OVER!!!!');
     }
-  };
+  }, [remainingItems]);
 
   return (
     <div className="game-page">
@@ -193,21 +194,24 @@ function GamePage() {
         •
       </div>
       <div id="dropdown">
-        {state.game.items
-          .filter((item) => !item.found)
-          .map((item) => {
-            return (
-              <div className="dropdown-item" key={item.name} onClick={() => handleSelectItem(item)}>
-                <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" />
-                <p>{item.name}</p>
-              </div>
-            );
-          })}
+        {state.game.items.map((item) => {
+          return (
+            <div
+              className="dropdown-item"
+              key={item.name}
+              id={'dropdown-item' + item._id}
+              onClick={() => handleSelectItem(item)}
+            >
+              <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" />
+              <p>{item.name}</p>
+            </div>
+          );
+        })}
       </div>
       <div className="items-to-find">
         {state.game.items.map((item) => {
           return (
-            <div key={item._id} className="item" id={item._id}>
+            <div key={item._id} className="item" id={'item' + item._id}>
               <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" />
               <p>{item.name}</p>
             </div>
