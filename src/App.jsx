@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [games, setGames] = useState([]);
+  const [currentGame, setCurrentGame] = useState(null);
 
   useEffect(() => {
     const getGameData = async () => {
@@ -26,21 +27,21 @@ function App() {
 
   return (
     <>
-      <Header />
-      <Outlet />
+      <Header currentGame={currentGame} setCurrentGame={setCurrentGame} />
+      <Outlet context={{ games, currentGame, setCurrentGame }} />
     </>
   );
 }
 
 export default App;
 
-// hook front end up to backend
+// maybe need to hook up local storage to keep current game
 
-// validate coordinates
+// add items to look for in header and stick header to top when scroll???
 
-// implement selecting, validating, and returning appropriate message
+// add pop up messages when click on item
 
-// pass parameters depending on game
+// add popup to add name to leaderboard when game is over
 
 // exiting to home resets game!!
 

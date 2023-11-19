@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useOutletContext } from 'react-router-dom';
 
 function GamePage() {
   const [targetBox, setTargetBox] = useState(null);
   const [dropdown, setDropdown] = useState(null);
   const [currentX, setCurrentX] = useState(null);
   const [currentY, setCurrentY] = useState(null);
-  const location = useLocation();
+  const { setCurrentGame } = useOutletContext();
+  const { state } = useLocation();
 
   useEffect(() => {
     setTargetBox(document.getElementById('target-box'));
     setDropdown(document.getElementById('dropdown'));
   }, []);
+
+  useEffect(() => {
+    setCurrentGame(state.game);
+  });
 
   const showCoords = (e) => {
     const x = e.pageX - e.target.offsetLeft;
@@ -59,7 +64,7 @@ function GamePage() {
       let natY = convertToNatYCoord(e);
       setCurrentY(natY);
 
-      let remainingItems = location.state.items.filter((obj) => !obj.found);
+      let remainingItems = state.game.items.filter((item) => !item.found);
 
       if (
         e.target.height < 680 &&
@@ -157,10 +162,10 @@ function GamePage() {
   // then success
   const handleSelectItem = (item) => {
     if (
-      currentX > item.coordinates.x - 50 &&
-      currentX < item.coordinates.x + 50 &&
-      currentY > item.coordinates.y - 50 &&
-      currentY < item.coordinates.y + 50
+      currentX > item.coords.x - 50 &&
+      currentX < item.coords.x + 50 &&
+      currentY > item.coords.y - 50 &&
+      currentY < item.coords.y + 50
     ) {
       item.found = true;
       hideTargetBox();
@@ -173,7 +178,7 @@ function GamePage() {
   };
 
   const checkWin = () => {
-    let remainingItems = location.state.items.filter((obj) => !obj.found);
+    let remainingItems = state.game.items.filter((item) => !item.found);
     if (remainingItems.length < 1) {
       console.log('YOU WINNNNN GAME OVER!!!!');
     }
@@ -181,18 +186,23 @@ function GamePage() {
 
   return (
     <div className="game-page">
-      <img onClick={handleClick} className="main-img" src={location.state.imgURL} alt="" />
+      <img
+        onClick={handleClick}
+        className="main-img"
+        src={'http://localhost:3000/api/img/games/' + state.game._id}
+        alt=""
+      />
       <div onClick={hideTargetBox} id="target-box">
         •
       </div>
       <div id="dropdown">
-        {location.state.items
-          .filter((obj) => !obj.found)
-          .map((obj) => {
+        {state.game.items
+          .filter((item) => !item.found)
+          .map((item) => {
             return (
-              <div className="dropdown-item" key={obj.name} onClick={() => handleSelectItem(obj)}>
-                <img src={obj.image} alt="" />
-                <p>{obj.name}</p>
+              <div className="dropdown-item" key={item.name} onClick={() => handleSelectItem(item)}>
+                <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" />
+                <p>{item.name}</p>
               </div>
             );
           })}

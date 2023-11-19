@@ -12,7 +12,7 @@ function Router() {
       element: <App />,
       children: [
         { path: '/', element: <HomePage /> },
-        { path: '/game/:gameId', element: <GamePage /> },
+        { path: '/game/:gameKey', element: <GamePage /> },
         { path: '/leaderboard', element: <LeaderboardPage /> },
         { path: '/about', element: <AboutPage /> },
       ],

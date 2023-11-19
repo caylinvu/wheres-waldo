@@ -92,6 +92,29 @@
   transition: filter 0.2s;
 }
 
+/* ~~~~~~~~~~ IN GAME HEADER~~~~~~~~~~ */
+
+.items-to-find {
+  display: flex;
+  gap: 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.item img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.item img:hover {
+  transform: scale(3) translateY(10px);
+  transition: transform 0.2s;
+}
+
 /* ~~~~~~~~~~GAME PAGE~~~~~~~~~~ */
 
 .main-img {
