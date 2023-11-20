@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 
 function GamePage() {
   const [targetBox, setTargetBox] = useState(null);
@@ -16,6 +16,7 @@ function GamePage() {
   const [name, setName] = useState('');
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { updateLeaderboard, setUpdateLeaderboard } = useOutletContext();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -247,6 +248,7 @@ function GamePage() {
       if (response.status === 200) {
         setName('');
         setGameTimer(0);
+        setUpdateLeaderboard(!updateLeaderboard);
         navigate('/leaderboard', { state: state.game });
       }
     } catch (err) {

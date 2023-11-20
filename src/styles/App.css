@@ -340,3 +340,26 @@
   outline: white solid 2px;
   box-shadow: 0 2px 20px white;
 }
+
+.leaderboard-container {
+  max-width: 800px;
+  margin: auto;
+  border-radius: 8px;
+  background-color: rgb(109, 65, 86);
+  overflow: hidden;
+}
+
+/* maybe cut off date on smaller screens and add ellipses to end of long names */
+
+.lb-entry {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 0.6fr 0.6fr;
+  justify-content: center;
+  padding: 20px;
+  text-align: left;
+}
+
+.lb-entry.labels {
+  font-weight: 500;
+  background-color: rgb(133, 82, 106);
+}

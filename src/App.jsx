@@ -5,7 +5,9 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [games, setGames] = useState([]);
+  const [lbEntries, setlbEntries] = useState([]);
   const [lbGame, setlbGame] = useState(null);
+  const [updateLeaderboard, setUpdateLeaderboard] = useState(false);
 
   useEffect(() => {
     const getGameData = async () => {
@@ -17,6 +19,7 @@ function App() {
         const gameData = await response.json();
         setGames(gameData);
         setlbGame(gameData[0]);
+        console.log(gameData[0]);
       } catch (err) {
         setGames([]);
         setlbGame(null);
@@ -26,10 +29,29 @@ function App() {
     getGameData();
   }, []);
 
+  useEffect(() => {
+    const getlbData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/entries');
+        if (!response.ok) {
+          throw new Error(`This is an HTTP error: The status is ${response.status}`);
+        }
+        const lbData = await response.json();
+        setlbEntries(lbData);
+      } catch (err) {
+        setlbEntries([]);
+        console.log(err);
+      }
+    };
+    getlbData();
+  }, [updateLeaderboard]);
+
   return (
     <>
       <Header />
-      <Outlet context={{ games, lbGame, setlbGame }} />
+      <Outlet
+        context={{ games, lbGame, setlbGame, updateLeaderboard, setUpdateLeaderboard, lbEntries }}
+      />
     </>
   );
 }
