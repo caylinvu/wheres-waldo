@@ -3,10 +3,15 @@ import { useState, useEffect } from 'react';
 
 function LeaderboardPage() {
   const { games, lbGame, setlbGame, lbEntries } = useOutletContext();
-  const [gameEntries, setGameEntries] = useState([]);
+  // const [gameEntries, setGameEntries] = useState([]);
   const { state } = useLocation();
   let placeCounter = 1;
-  console.log(lbGame);
+
+  useEffect(() => {
+    if (state) {
+      setlbGame(state);
+    }
+  }, [state]);
 
   // maybe set up params on leaderboard so that info can be retrieved more easily
 

@@ -310,6 +310,7 @@ function GamePage() {
                     type="text"
                     name="name"
                     id="name"
+                    pattern="[a-zA-Z0-9]+"
                     maxLength={30}
                     value={name}
                     onChange={(e) => setName(e.target.value)}

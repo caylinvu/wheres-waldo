@@ -58,12 +58,6 @@ function App() {
 
 export default App;
 
-// add popup to add name to leaderboard when game is over
-
-// display time and request name in pop up
-
-// add leaderboard
-
 // edit dropdown to adjust placement based on # of items remaining (only Y axis lower half)
 // RESTRUCTURE whole dropdown system so that it is based on a big switch statement
 
