@@ -33,8 +33,6 @@ function App() {
 
 export default App;
 
-// add timer to game
-
 // add popup to add name to leaderboard when game is over
 
 // display time and request name in pop up

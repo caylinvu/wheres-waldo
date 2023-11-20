@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function GamePage() {
   const [targetBox, setTargetBox] = useState(null);
@@ -13,7 +13,9 @@ function GamePage() {
   const [alertTimer, setAlertTimer] = useState(null);
   const [gameTimer, setGameTimer] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [name, setName] = useState('');
   const { state } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -228,6 +230,30 @@ function GamePage() {
     }
   }, [remainingItems]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        'http://localhost:3000/api/games/' + state.game._id + '/entries',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            seconds: gameTimer,
+          }),
+        },
+      );
+      if (response.status === 200) {
+        setName('');
+        setGameTimer(0);
+        navigate('/leaderboard');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="game-page">
       <img
@@ -266,6 +292,35 @@ function GamePage() {
           );
         })}
       </div>
+      {isGameOver && (
+        <div className="popup-container">
+          <div className="blocker"></div>
+          <div className="end-container">
+            <div className="end-popup">
+              <p className="timer-text">
+                {'You finished in ' + new Date(gameTimer * 1000).toISOString().slice(11, 19)}
+              </p>
+              <p>Submit your score to the leaderboard</p>
+              <form onSubmit={handleSubmit} className="entry-form">
+                <div className="form-group">
+                  <label htmlFor="name">Display name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    maxLength={30}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+                <input type="hidden" name="seconds" value={gameTimer} />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
