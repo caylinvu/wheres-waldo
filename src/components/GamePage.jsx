@@ -10,8 +10,22 @@ function GamePage() {
   const [message, setMessage] = useState('');
   const [alertClass, setAlertClass] = useState('');
   const [alertTimeUp, setAlertTimeUp] = useState(true);
-  const [timer, setTimer] = useState(null);
+  const [alertTimer, setAlertTimer] = useState(null);
+  const [gameTimer, setGameTimer] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
   const { state } = useLocation();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGameTimer(gameTimer + 1);
+    }, 1000);
+
+    if (isGameOver) {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [gameTimer, isGameOver]);
 
   useEffect(() => {
     setTargetBox(document.getElementById('target-box'));
@@ -180,24 +194,24 @@ function GamePage() {
     }
     if (alertTimeUp === true) {
       setAlertTimeUp(false);
-      startTimer();
+      startAlertTimer();
     } else {
-      resetTimer();
+      resetAlertTimer();
       resetAnimation();
     }
   };
 
-  const startTimer = () => {
-    setTimer(
+  const startAlertTimer = () => {
+    setAlertTimer(
       setTimeout(() => {
         setAlertTimeUp(true);
       }, 3000),
     );
   };
 
-  function resetTimer() {
-    clearTimeout(timer);
-    startTimer();
+  function resetAlertTimer() {
+    clearTimeout(alertTimer);
+    startAlertTimer();
   }
 
   const resetAnimation = () => {
@@ -209,6 +223,7 @@ function GamePage() {
 
   useEffect(() => {
     if (remainingItems < 1) {
+      setIsGameOver(true);
       console.log('YOU WINNNNN GAME OVER!!!!');
     }
   }, [remainingItems]);
@@ -240,6 +255,7 @@ function GamePage() {
           );
         })}
       </div>
+      <div className="game-timer">{new Date(gameTimer * 1000).toISOString().slice(11, 19)}</div>
       <div className="items-to-find">
         {state.game.items.map((item) => {
           return (

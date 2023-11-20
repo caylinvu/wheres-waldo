@@ -103,6 +103,15 @@
 
 /* ~~~~~~~~~~ IN GAME HEADER~~~~~~~~~~ */
 
+.game-timer {
+  position: fixed;
+  top: 0;
+  left: 400px;
+  padding: 29px 0;
+  z-index: 15;
+  font-size: 20px;
+}
+
 .items-to-find {
   display: flex;
   gap: 20px;

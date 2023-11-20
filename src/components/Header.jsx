@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function Header() {
-  const [isPlaying, setIsPlaying] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(true);
   const location = useLocation();
 
   useEffect(() => {

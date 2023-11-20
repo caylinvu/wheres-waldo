@@ -33,13 +33,13 @@ function App() {
 
 export default App;
 
-// add pop up messages when click on item
+// add timer to game
 
 // add popup to add name to leaderboard when game is over
 
-// exiting to home resets game!!
+// display time and request name in pop up
 
-// make text inside of target and dropdown untargetable
+// add leaderboard
 
 // edit dropdown to adjust placement based on # of items remaining (only Y axis lower half)
 // RESTRUCTURE whole dropdown system so that it is based on a big switch statement
@@ -48,15 +48,11 @@ export default App;
 // -- maybe change to add +/- 40-50 to the actual coordinates and then convert to natural
 // convert 50 local coords to nat and use in handleSelectItem
 
-// display remaining items in header
-
 // make things not selectable
+// -- make text inside of target and dropdown untargetable
+// -- full image not highlightable
 
-// add timer to game
-
-// display time and request name in pop up
-
-// show leaderboard
+// rearrange header stuff
 
 // credit image artist!!!
 
