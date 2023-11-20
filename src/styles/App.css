@@ -186,3 +186,48 @@
 .hidden {
   display: none;
 }
+
+/* ~~~~~~~~~~ALERT~~~~~~~~~~ */
+
+.alert {
+  position: fixed;
+  top: 110px;
+  padding: 15px 20px;
+  border-radius: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 500;
+  animation: fadeInAndOut 3000ms;
+}
+
+.alert-success {
+  background-color: green;
+}
+
+.alert-fail {
+  background-color: rgb(216, 0, 0);
+}
+
+@keyframes fadeInAndOut {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.5;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}

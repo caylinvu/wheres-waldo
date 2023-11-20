@@ -7,6 +7,10 @@ function GamePage() {
   const [currentX, setCurrentX] = useState(null);
   const [currentY, setCurrentY] = useState(null);
   const [remainingItems, setRemainingItems] = useState(5);
+  const [message, setMessage] = useState('');
+  const [alertClass, setAlertClass] = useState('');
+  const [alertTimeUp, setAlertTimeUp] = useState(true);
+  const [timer, setTimer] = useState(null);
   const { state } = useLocation();
 
   useEffect(() => {
@@ -59,8 +63,6 @@ function GamePage() {
 
       let natY = convertToNatYCoord(e);
       setCurrentY(natY);
-
-      console.log(remainingItems);
 
       if (
         e.target.height < 680 &&
@@ -169,11 +171,40 @@ function GamePage() {
       dropdownElement.classList.add('hidden');
       setRemainingItems(remainingItems - 1);
       hideTargetBox();
-      console.log('success!!!');
+      setMessage(`You found ${item.name}!`);
+      setAlertClass('alert-success');
     } else {
       hideTargetBox();
-      console.log('try again!!!');
+      setMessage('Try again');
+      setAlertClass('alert-fail');
     }
+    if (alertTimeUp === true) {
+      setAlertTimeUp(false);
+      startTimer();
+    } else {
+      resetTimer();
+      resetAnimation();
+    }
+  };
+
+  const startTimer = () => {
+    setTimer(
+      setTimeout(() => {
+        setAlertTimeUp(true);
+      }, 3000),
+    );
+  };
+
+  function resetTimer() {
+    clearTimeout(timer);
+    startTimer();
+  }
+
+  const resetAnimation = () => {
+    const element = document.querySelector('.alert');
+    element.style.animation = 'none';
+    element.offsetHeight;
+    element.style.animation = null;
   };
 
   useEffect(() => {
@@ -190,6 +221,7 @@ function GamePage() {
         src={'http://localhost:3000/api/img/games/' + state.game._id}
         alt=""
       />
+      {alertTimeUp ? null : <div className={'alert ' + alertClass}>{message}</div>}
       <div onClick={hideTargetBox} id="target-box">
         •
       </div>
