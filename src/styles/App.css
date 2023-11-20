@@ -308,3 +308,35 @@
   padding: 7px 15px;
   cursor: pointer;
 }
+
+/* ~~~~~~~~~~LEADERBOARD PAGE~~~~~~~~~~ */
+
+.leaderboard-page {
+  text-align: center;
+  margin: 0 10px 20px;
+}
+
+.lb-games {
+  cursor: pointer;
+}
+
+.lb-title {
+  font-weight: 500;
+  margin: 25px 0;
+  font-size: 28px;
+}
+
+.leaderboard-page .game-text {
+  padding: 30px 10px;
+}
+
+.lb-game-title {
+  font-weight: 500;
+  margin: 40px 0 25px;
+  font-size: 25px;
+}
+
+.selected {
+  outline: white solid 2px;
+  box-shadow: 0 2px 20px white;
+}

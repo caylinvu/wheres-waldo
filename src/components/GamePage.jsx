@@ -247,7 +247,7 @@ function GamePage() {
       if (response.status === 200) {
         setName('');
         setGameTimer(0);
-        navigate('/leaderboard');
+        navigate('/leaderboard', { state: state.game });
       }
     } catch (err) {
       console.log(err);

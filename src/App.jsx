@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [games, setGames] = useState([]);
+  const [lbGame, setlbGame] = useState(null);
 
   useEffect(() => {
     const getGameData = async () => {
@@ -15,8 +16,10 @@ function App() {
         }
         const gameData = await response.json();
         setGames(gameData);
+        setlbGame(gameData[0]);
       } catch (err) {
         setGames([]);
+        setlbGame(null);
         console.log(err);
       }
     };
@@ -26,7 +29,7 @@ function App() {
   return (
     <>
       <Header />
-      <Outlet context={{ games }} />
+      <Outlet context={{ games, lbGame, setlbGame }} />
     </>
   );
 }
