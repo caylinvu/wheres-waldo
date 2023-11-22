@@ -298,7 +298,9 @@ function GamePage() {
               <p>Submit your score to the leaderboard</p>
               <form onSubmit={handleSubmit} className="entry-form">
                 <div className="form-group">
-                  <label htmlFor="name">Display name</label>
+                  <label htmlFor="name">
+                    Display name <span>(numbers & letters only)</span>
+                  </label>
                   <input
                     type="text"
                     name="name"

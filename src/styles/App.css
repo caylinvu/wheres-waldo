@@ -283,6 +283,15 @@
 .form-group label {
   display: block;
   margin-bottom: 5px;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.form-group span {
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .form-group input {
