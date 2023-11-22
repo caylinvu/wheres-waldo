@@ -62,6 +62,8 @@ export default App;
 // make leaderboard data based off of params also
 // move item/timer components to header and pull info from path
 
+// Target box/dropdown - break out into functions to show/hide (set to state)
+
 // rearrange header stuff
 // -- add timer and game items to header (access through params - key of game)
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
+import Dropdown from './Dropdown';
 
 function GamePage() {
   const [targetBox, setTargetBox] = useState(null);
@@ -19,6 +20,7 @@ function GamePage() {
   const { updateLeaderboard, setUpdateLeaderboard } = useOutletContext();
   const [coordRange, setCoordRange] = useState(0);
 
+  // Start/stop game timer
   useEffect(() => {
     const interval = setInterval(() => {
       setGameTimer(gameTimer + 1);
@@ -31,28 +33,30 @@ function GamePage() {
     return () => clearInterval(interval);
   }, [gameTimer, isGameOver]);
 
+  // Assign target box and dropdown to state variables so they can be manipulated on clicks
   useEffect(() => {
     setTargetBox(document.getElementById('target-box'));
     setDropdown(document.getElementById('dropdown'));
   }, []);
 
-  const showCoords = (e) => {
-    const x = e.pageX - e.target.offsetLeft;
-    const y = e.pageY - e.target.offsetTop;
-    const actualX = Math.round((x / e.target.width) * e.target.naturalWidth);
-    const actualY = Math.round((y / e.target.height) * e.target.naturalHeight);
+  // const showCoords = (e) => {
+  //   const x = e.pageX - e.target.offsetLeft;
+  //   const y = e.pageY - e.target.offsetTop;
+  //   const actualX = Math.round((x / e.target.width) * e.target.naturalWidth);
+  //   const actualY = Math.round((y / e.target.height) * e.target.naturalHeight);
 
-    console.log('img coords: ' + x + ', ' + y);
-    console.log('img: ' + e.target.width + ', ' + e.target.height);
-    console.log('actual coords: ' + actualX + ', ' + actualY);
-    console.log('natural: ' + e.target.naturalWidth + ', ' + e.target.naturalHeight);
-  };
+  //   console.log('img coords: ' + x + ', ' + y);
+  //   console.log('img: ' + e.target.width + ', ' + e.target.height);
+  //   console.log('actual coords: ' + actualX + ', ' + actualY);
+  //   console.log('natural: ' + e.target.naturalWidth + ', ' + e.target.naturalHeight);
+  // };
 
   // Convert coord to placement in natural image
   const convertToNat = (coord, dimension, natDimension) => {
     return Math.round((coord / dimension) * natDimension);
   };
 
+  // Handle click on image
   const handleClick = (e) => {
     if (targetBox.style.display === 'none' || targetBox.style.display === '') {
       // Display the target box
@@ -151,17 +155,20 @@ function GamePage() {
           break;
       }
     } else {
+      // Hide target box and dropdown if already displayed when clicking
       hideTargetBox();
     }
 
     // showCoords(e);
   };
 
+  // Hide target box and dropdown
   const hideTargetBox = () => {
     targetBox.style.display = 'none';
     dropdown.style.display = 'none';
   };
 
+  // Hide targetbox and dropdown on window resize
   useEffect(() => {
     window.addEventListener('resize', hideTargetBox);
 
@@ -170,6 +177,7 @@ function GamePage() {
     };
   });
 
+  // Handle selecting a game item from the dropdown list
   const handleSelectItem = (item) => {
     if (
       currentX > item.coords.x - coordRange &&
@@ -190,15 +198,20 @@ function GamePage() {
       setMessage('Try again');
       setAlertClass('alert-fail');
     }
+
+    // Handle alert
     if (alertTimeUp === true) {
+      // Display alert if no alert is currently shown
       setAlertTimeUp(false);
       startAlertTimer();
     } else {
+      // If alert is already displayed, reset it and show new alert
       resetAlertTimer();
       resetAnimation();
     }
   };
 
+  // Start the alert timer
   const startAlertTimer = () => {
     setAlertTimer(
       setTimeout(() => {
@@ -207,11 +220,13 @@ function GamePage() {
     );
   };
 
+  // Clear the alert timer and start a new one
   function resetAlertTimer() {
     clearTimeout(alertTimer);
     startAlertTimer();
   }
 
+  // Reset the animation for the alert notification
   const resetAnimation = () => {
     const element = document.querySelector('.alert');
     element.style.animation = 'none';
@@ -219,13 +234,14 @@ function GamePage() {
     element.style.animation = null;
   };
 
+  // Check if game is over
   useEffect(() => {
     if (remainingItems < 1) {
       setIsGameOver(true);
-      console.log('YOU WINNNNN GAME OVER!!!!');
     }
   }, [remainingItems]);
 
+  // Handle submitting the leaderboard entry form
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -264,25 +280,7 @@ function GamePage() {
       <div onClick={hideTargetBox} id="target-box">
         •
       </div>
-      <div id="dropdown">
-        {state.game.items.map((item) => {
-          return (
-            <div
-              className="dropdown-item"
-              key={item.name}
-              id={'dropdown-item' + item._id}
-              onClick={() => handleSelectItem(item)}
-            >
-              <img
-                src={'http://localhost:3000/api/img/items/' + item._id}
-                alt=""
-                draggable={false}
-              />
-              <p>{item.name}</p>
-            </div>
-          );
-        })}
-      </div>
+      <Dropdown items={state.game.items} handleSelectItem={handleSelectItem} />
       <div className="game-timer">{new Date(gameTimer * 1000).toISOString().slice(11, 19)}</div>
       <div className="items-to-find">
         {state.game.items.map((item) => {
