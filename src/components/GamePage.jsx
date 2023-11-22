@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import GameImage from './GameImage';
 import TargetBox from './TargetBox';
 import GameItems from './GameItems';
 import GameTimer from './GameTimer';
@@ -243,13 +244,7 @@ function GamePage() {
 
   return (
     <div className="game-page">
-      <img
-        onClick={handleClick}
-        className="main-img"
-        src={'http://localhost:3000/api/img/games/' + state.game._id}
-        alt=""
-        draggable={false}
-      />
+      <GameImage game={state.game} imgClass="main-img" handleClick={handleClick} />
       {alertTimeUp ? null : <div className={'alert ' + alertClass}>{message}</div>}
       <TargetBox hideTargetBox={hideTargetBox} />
       <GameItems

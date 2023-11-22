@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import GameImage from './GameImage';
 
 function GameContainer({ page, games, lbGame, setlbGame }) {
   return (
@@ -18,11 +19,7 @@ function GameContainer({ page, games, lbGame, setlbGame }) {
             onClick={page === 'leaderboard' ? () => setlbGame(game) : null}
           >
             <div className="game-img">
-              <img
-                src={'http://localhost:3000/api/img/games/' + game._id}
-                alt=""
-                draggable={false}
-              />
+              <GameImage game={game} />
             </div>
             <div className="game-text">
               <p>{game.title}</p>
