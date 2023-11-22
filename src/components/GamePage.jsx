@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
-import Dropdown from './Dropdown';
+import TargetBox from './TargetBox';
+import GameItems from './GameItems';
+import GameTimer from './GameTimer';
+import EndPopup from './EndPopup';
 
 function GamePage() {
   const [targetBox, setTargetBox] = useState(null);
@@ -14,10 +17,7 @@ function GamePage() {
   const [alertTimer, setAlertTimer] = useState(null);
   const [gameTimer, setGameTimer] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [name, setName] = useState('');
   const { state } = useLocation();
-  const navigate = useNavigate();
-  const { updateLeaderboard, setUpdateLeaderboard } = useOutletContext();
   const [coordRange, setCoordRange] = useState(0);
 
   // Start/stop game timer
@@ -241,32 +241,6 @@ function GamePage() {
     }
   }, [remainingItems]);
 
-  // Handle submitting the leaderboard entry form
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        'http://localhost:3000/api/games/' + state.game._id + '/entries',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: name,
-            seconds: gameTimer,
-          }),
-        },
-      );
-      if (response.status === 200) {
-        setName('');
-        setGameTimer(0);
-        setUpdateLeaderboard(!updateLeaderboard);
-        navigate('/leaderboard', { state: state.game });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <div className="game-page">
       <img
@@ -277,54 +251,17 @@ function GamePage() {
         draggable={false}
       />
       {alertTimeUp ? null : <div className={'alert ' + alertClass}>{message}</div>}
-      <div onClick={hideTargetBox} id="target-box">
-        •
-      </div>
-      <Dropdown items={state.game.items} handleSelectItem={handleSelectItem} />
-      <div className="game-timer">{new Date(gameTimer * 1000).toISOString().slice(11, 19)}</div>
-      <div className="items-to-find">
-        {state.game.items.map((item) => {
-          return (
-            <div key={item._id} className="item" id={'item' + item._id}>
-              <img
-                src={'http://localhost:3000/api/img/items/' + item._id}
-                alt=""
-                draggable={false}
-              />
-              <p>{item.name}</p>
-            </div>
-          );
-        })}
-      </div>
+      <TargetBox hideTargetBox={hideTargetBox} />
+      <GameItems
+        items={state.game.items}
+        type="dropdown"
+        itemClass="dropdown-item"
+        handleSelectItem={handleSelectItem}
+      />
+      <GameTimer gameTimer={gameTimer} />
+      <GameItems items={state.game.items} type="items-to-find" itemClass="item" />
       {isGameOver && (
-        <div className="popup-container">
-          <div className="blocker"></div>
-          <div className="end-container">
-            <div className="end-popup">
-              <p className="timer-text">{'You finished in ' + gameTimer + 's!'}</p>
-              <p>Submit your score to the leaderboard</p>
-              <form onSubmit={handleSubmit} className="entry-form">
-                <div className="form-group">
-                  <label htmlFor="name">
-                    Display name <span>(numbers & letters only)</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    pattern="[a-zA-Z0-9]+"
-                    maxLength={30}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-                <input type="hidden" name="seconds" value={gameTimer} />
-                <button type="submit">Submit</button>
-              </form>
-            </div>
-          </div>
-        </div>
+        <EndPopup game={state.game} gameTimer={gameTimer} setGameTimer={setGameTimer} />
       )}
     </div>
   );

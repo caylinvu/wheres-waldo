@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 
-function Dropdown({ items, handleSelectItem }) {
+function GameItems({ items, type, itemClass, handleSelectItem }) {
   return (
-    <div id="dropdown">
+    <div id={type}>
       {items.map((item) => {
         return (
           <div
-            className="dropdown-item"
-            key={item.name}
-            id={'dropdown-item' + item._id}
-            onClick={() => handleSelectItem(item)}
+            key={item._id}
+            className={itemClass}
+            id={itemClass + item._id}
+            onClick={type === 'dropdown' ? () => handleSelectItem(item) : null}
           >
             <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" draggable={false} />
             <p>{item.name}</p>
@@ -20,9 +20,11 @@ function Dropdown({ items, handleSelectItem }) {
   );
 }
 
-Dropdown.propTypes = {
+GameItems.propTypes = {
   items: PropTypes.array,
+  type: PropTypes.string,
+  itemClass: PropTypes.string,
   handleSelectItem: PropTypes.func,
 };
 
-export default Dropdown;
+export default GameItems;
