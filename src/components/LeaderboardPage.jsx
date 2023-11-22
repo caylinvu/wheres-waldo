@@ -1,5 +1,6 @@
 import { useOutletContext, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import GameContainer from './GameContainer';
 
 function LeaderboardPage() {
   const { games, lbGame, setlbGame, lbEntries } = useOutletContext();
@@ -18,28 +19,7 @@ function LeaderboardPage() {
   return (
     <div className="leaderboard-page">
       <h2 className="lb-title">Leaderboard</h2>
-      <div className="game-container">
-        {games.map((game) => {
-          return (
-            <div
-              key={game.key}
-              className={lbGame._id === game._id ? 'lb-games selected' : 'lb-games'}
-              onClick={() => setlbGame(game)}
-            >
-              <div className="game-img">
-                <img
-                  src={'http://localhost:3000/api/img/games/' + game._id}
-                  alt=""
-                  draggable={false}
-                />
-              </div>
-              <div className="game-text">
-                <p>{game.title}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <GameContainer page="leaderboard" games={games} lbGame={lbGame} setlbGame={setlbGame} />
       {lbGame && (
         <>
           <h2 className="lb-game-title">{lbGame.title}</h2>
