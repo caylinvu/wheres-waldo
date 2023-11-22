@@ -206,6 +206,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-weight: 500;
+  opacity: 0;
   animation: fadeInAndOut 3000ms;
 }
 
@@ -214,7 +215,7 @@
 }
 
 .alert-fail {
-  background-color: rgb(216, 0, 0);
+  background-color: rgb(201, 0, 0);
 }
 
 @keyframes fadeInAndOut {
