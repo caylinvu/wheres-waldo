@@ -306,9 +306,7 @@ function GamePage() {
           <div className="blocker"></div>
           <div className="end-container">
             <div className="end-popup">
-              <p className="timer-text">
-                {'You finished in ' + new Date(gameTimer * 1000).toISOString().slice(11, 19)}
-              </p>
+              <p className="timer-text">{'You finished in ' + gameTimer + 's!'}</p>
               <p>Submit your score to the leaderboard</p>
               <form onSubmit={handleSubmit} className="entry-form">
                 <div className="form-group">

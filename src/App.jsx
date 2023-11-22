@@ -57,9 +57,6 @@ function App() {
 
 export default App;
 
-// change seconds to cut off at 11 if seconds are greater than 3600
-// cut off at 14 if less than 3600 seconds
-
 // edit dropdown to adjust placement based on # of items remaining (only Y axis lower half)
 // RESTRUCTURE whole dropdown system so that it is based on a big switch statement
 
@@ -68,6 +65,9 @@ export default App;
 // -- full image not highlightable
 
 // rearrange header stuff
+// -- add timer and game items to header (access through params - key of game)
+
+// access leaderboard pages through params too???
 
 // credit image artist!!!
 
@@ -78,3 +78,5 @@ export default App;
 // does targetBox and dropdown need to be in state???
 
 // add footer????
+
+// REFACTOR CODE!!!!!!
