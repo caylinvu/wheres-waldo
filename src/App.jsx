@@ -57,8 +57,7 @@ function App() {
 
 export default App;
 
-// edit dropdown to adjust placement based on # of items remaining (only Y axis lower half)
-// RESTRUCTURE whole dropdown system so that it is based on a big switch statement
+// update display name on form requirements
 
 // make things not selectable
 // -- make text inside of target and dropdown untargetable

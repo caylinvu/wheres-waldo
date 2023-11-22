@@ -88,79 +88,67 @@ function GamePage() {
       let range = convertToNat(35, e.target.width, e.target.naturalWidth);
       setCoordRange(range);
 
-      // Shift the placement of the dropdown box depending on # of remaining items in dropdown list
-      // Also flip placement of dropdown box if the coord is on the lower half of the screen
-      // CHANGE THIS TO ONE BIG SWITCH STATEMENT
-      if (
-        e.target.height < 680 &&
-        natY > e.target.naturalHeight * 0.38 &&
-        natY < e.target.naturalHeight * 0.61
-      ) {
-        switch (remainingItems) {
-          case 5:
+      // Shift placement of dropdown list depending on # of remaining items and location on screen
+      switch (remainingItems) {
+        case 5:
+          if (
+            e.target.height < 680 &&
+            natY > e.target.naturalHeight * 0.38 &&
+            natY < e.target.naturalHeight * 0.61
+          ) {
             dropdown.style.top = e.pageY - 160 + 'px';
-            break;
-          case 4:
-            dropdown.style.top = e.pageY - 160 + 32 + 'px';
-            break;
-          case 3:
-            dropdown.style.top = e.pageY - 160 + 32 + 32 + 'px';
-            break;
-          case 2:
-            dropdown.style.top = e.pageY - 160 + 32 + 32 + 32 + 'px';
-            break;
-          case 1:
-            dropdown.style.top = e.pageY - 160 + 32 + 32 + 32 + 32 + 'px';
-            break;
-        }
-      } else if (
-        e.target.height < 680 &&
-        natY > e.target.naturalHeight * 0.21 &&
-        natY <= e.target.naturalHeight * 0.38
-      ) {
-        dropdown.style.top = e.pageY - 60 + 'px';
-      } else if (
-        e.target.height < 680 &&
-        natY >= e.target.naturalHeight * 0.61 &&
-        natY < e.target.naturalHeight * 0.76
-      ) {
-        switch (remainingItems) {
-          case 5:
+          } else if (
+            e.target.height < 680 &&
+            natY > e.target.naturalHeight * 0.21 &&
+            natY <= e.target.naturalHeight * 0.38
+          ) {
+            dropdown.style.top = e.pageY - 60 + 'px';
+          } else if (
+            e.target.height < 680 &&
+            natY >= e.target.naturalHeight * 0.61 &&
+            natY < e.target.naturalHeight * 0.76
+          ) {
             dropdown.style.top = e.pageY - 260 + 'px';
-            break;
-          case 4:
-            dropdown.style.top = e.pageY - 260 + 64 + 'px';
-            break;
-          case 3:
-            dropdown.style.top = e.pageY - 260 + 64 + 64 + 'px';
-            break;
-          case 2:
-            dropdown.style.top = e.pageY - 260 + 64 + 64 + 64 + 'px';
-            break;
-          case 1:
-            dropdown.style.top = e.pageY - 260 + 64 + 64 + 64 + 64 + 'px';
-            break;
-        }
-      } else if (natY > e.target.naturalHeight / 2) {
-        switch (remainingItems) {
-          case 5:
+          } else if (natY > e.target.naturalHeight / 2) {
             dropdown.style.top = e.pageY - 325 + 'px';
-            break;
-          case 4:
+          } else {
+            dropdown.style.top = e.pageY + 10 + 'px';
+          }
+          break;
+        case 4:
+          if (
+            e.target.height < 680 &&
+            natY > e.target.naturalHeight * 0.38 &&
+            natY < e.target.naturalHeight * 0.61
+          ) {
+            dropdown.style.top = e.pageY - 160 + 32 + 'px';
+          } else if (natY > e.target.naturalHeight / 2) {
             dropdown.style.top = e.pageY - 325 + 64 + 'px';
-            break;
-          case 3:
+          } else {
+            dropdown.style.top = e.pageY + 10 + 'px';
+          }
+          break;
+        case 3:
+          if (natY > e.target.naturalHeight / 2) {
             dropdown.style.top = e.pageY - 325 + 64 + 64 + 'px';
-            break;
-          case 2:
+          } else {
+            dropdown.style.top = e.pageY + 10 + 'px';
+          }
+          break;
+        case 2:
+          if (natY > e.target.naturalHeight / 2) {
             dropdown.style.top = e.pageY - 325 + 64 + 64 + 64 + 'px';
-            break;
-          case 1:
+          } else {
+            dropdown.style.top = e.pageY + 10 + 'px';
+          }
+          break;
+        case 1:
+          if (natY > e.target.naturalHeight / 2) {
             dropdown.style.top = e.pageY - 325 + 64 + 64 + 64 + 64 + 'px';
-            break;
-        }
-      } else {
-        dropdown.style.top = e.pageY + 10 + 'px';
+          } else {
+            dropdown.style.top = e.pageY + 10 + 'px';
+          }
+          break;
       }
     } else {
       hideTargetBox();
