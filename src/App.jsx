@@ -19,7 +19,6 @@ function App() {
         const gameData = await response.json();
         setGames(gameData);
         setlbGame(gameData[0]);
-        console.log(gameData[0]);
       } catch (err) {
         setGames([]);
         setlbGame(null);
@@ -58,12 +57,11 @@ function App() {
 
 export default App;
 
+// change seconds to cut off at 11 if seconds are greater than 3600
+// cut off at 14 if less than 3600 seconds
+
 // edit dropdown to adjust placement based on # of items remaining (only Y axis lower half)
 // RESTRUCTURE whole dropdown system so that it is based on a big switch statement
-
-// if smaller screen add larger hit range
-// -- maybe change to add +/- 40-50 to the actual coordinates and then convert to natural
-// convert 50 local coords to nat and use in handleSelectItem
 
 // make things not selectable
 // -- make text inside of target and dropdown untargetable

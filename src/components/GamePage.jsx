@@ -17,6 +17,7 @@ function GamePage() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { updateLeaderboard, setUpdateLeaderboard } = useOutletContext();
+  const [coordRange, setCoordRange] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,52 +36,61 @@ function GamePage() {
     setDropdown(document.getElementById('dropdown'));
   }, []);
 
-  // const showCoords = (e) => {
-  //   const x = e.pageX - e.target.offsetLeft;
-  //   const y = e.pageY - e.target.offsetTop;
-  //   const actualX = Math.round((x / e.target.width) * e.target.naturalWidth);
-  //   const actualY = Math.round((y / e.target.height) * e.target.naturalHeight);
-
-  //   console.log('img coords: ' + x + ', ' + y);
-  //   console.log('img: ' + e.target.width + ', ' + e.target.height);
-  //   console.log('actual coords: ' + actualX + ', ' + actualY);
-  //   console.log('natural: ' + e.target.naturalWidth + ', ' + e.target.naturalHeight);
-  // };
-
-  const convertToNatXCoord = (e) => {
+  const showCoords = (e) => {
     const x = e.pageX - e.target.offsetLeft;
-    const natX = Math.round((x / e.target.width) * e.target.naturalWidth);
-    return natX;
+    const y = e.pageY - e.target.offsetTop;
+    const actualX = Math.round((x / e.target.width) * e.target.naturalWidth);
+    const actualY = Math.round((y / e.target.height) * e.target.naturalHeight);
+
+    console.log('img coords: ' + x + ', ' + y);
+    console.log('img: ' + e.target.width + ', ' + e.target.height);
+    console.log('actual coords: ' + actualX + ', ' + actualY);
+    console.log('natural: ' + e.target.naturalWidth + ', ' + e.target.naturalHeight);
   };
 
-  const convertToNatYCoord = (e) => {
-    const y = e.pageY - e.target.offsetTop;
-    const natY = Math.round((y / e.target.height) * e.target.naturalHeight);
-    return natY;
+  // Convert coord to placement in natural image
+  const convertToNat = (coord, dimension, natDimension) => {
+    return Math.round((coord / dimension) * natDimension);
   };
 
   const handleClick = (e) => {
     if (targetBox.style.display === 'none' || targetBox.style.display === '') {
+      // Display the target box
       targetBox.style.display = 'block';
       targetBox.style.position = 'absolute';
       targetBox.style.left = e.pageX - 40 + 'px';
       targetBox.style.top = e.pageY - 40 + 'px';
 
+      // Display the dropdown box
       dropdown.style.display = 'block';
       dropdown.style.position = 'absolute';
 
-      let natX = convertToNatXCoord(e);
+      // Convert the current x coord to placement in the natural image
+      let natX = convertToNat(e.pageX - e.target.offsetLeft, e.target.width, e.target.naturalWidth);
       setCurrentX(natX);
 
+      // If the coord is on the right half of the screen, flip the placement of the dropdown box
       if (natX > e.target.naturalWidth / 2) {
         dropdown.style.left = e.pageX - 155 + 'px';
       } else {
         dropdown.style.left = e.pageX + 10 + 'px';
       }
 
-      let natY = convertToNatYCoord(e);
+      // Convert the current y coord to placement in the natural image
+      let natY = convertToNat(
+        e.pageY - e.target.offsetTop,
+        e.target.height,
+        e.target.naturalHeight,
+      );
       setCurrentY(natY);
 
+      // Convert coord range of 40 to natural image equivalent
+      let range = convertToNat(35, e.target.width, e.target.naturalWidth);
+      setCoordRange(range);
+
+      // Shift the placement of the dropdown box depending on # of remaining items in dropdown list
+      // Also flip placement of dropdown box if the coord is on the lower half of the screen
+      // CHANGE THIS TO ONE BIG SWITCH STATEMENT
       if (
         e.target.height < 680 &&
         natY > e.target.naturalHeight * 0.38 &&
@@ -172,15 +182,12 @@ function GamePage() {
     };
   });
 
-  // if clicked coord (converted to nat) is greater than or equal to item coord - 40 AND less than or equal to item coord + 40
-  // on x AND y axis
-  // then success
   const handleSelectItem = (item) => {
     if (
-      currentX > item.coords.x - 50 &&
-      currentX < item.coords.x + 50 &&
-      currentY > item.coords.y - 50 &&
-      currentY < item.coords.y + 50
+      currentX > item.coords.x - coordRange &&
+      currentX < item.coords.x + coordRange &&
+      currentY > item.coords.y - coordRange &&
+      currentY < item.coords.y + coordRange
     ) {
       const element = document.getElementById('item' + item._id);
       element.classList.add('found');

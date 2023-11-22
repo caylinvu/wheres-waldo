@@ -53,7 +53,11 @@ function LeaderboardPage() {
                   <div key={entry._id} className="lb-entry">
                     <p>{placeCounter++}</p>
                     <p>{entry.name}</p>
-                    <p>{new Date(entry.seconds * 1000).toISOString().slice(14, 19)}</p>
+                    <p>
+                      {entry.seconds < 3600
+                        ? new Date(entry.seconds * 1000).toISOString().slice(14, 19)
+                        : new Date(entry.seconds * 1000).toISOString().slice(11, 19)}
+                    </p>
                     <p>{new Date(entry.timestamp).toLocaleDateString()}</p>
                   </div>
                 );
