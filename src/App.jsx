@@ -57,6 +57,11 @@ function App() {
 
 export default App;
 
+// break out code into more components first
+// make game data based off of params instead of passing state through
+// make leaderboard data based off of params also
+// move item/timer components to header and pull info from path
+
 // rearrange header stuff
 // -- add timer and game items to header (access through params - key of game)
 
