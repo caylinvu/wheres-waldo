@@ -13,7 +13,11 @@ function HomePage() {
           return (
             <div key={game.key}>
               <div className="game-img">
-                <img src={'http://localhost:3000/api/img/games/' + game._id} alt="" />
+                <img
+                  src={'http://localhost:3000/api/img/games/' + game._id}
+                  alt=""
+                  draggable={false}
+                />
               </div>
               <div className="game-text">
                 <p>{game.title}</p>

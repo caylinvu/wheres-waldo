@@ -27,7 +27,11 @@ function LeaderboardPage() {
               onClick={() => setlbGame(game)}
             >
               <div className="game-img">
-                <img src={'http://localhost:3000/api/img/games/' + game._id} alt="" />
+                <img
+                  src={'http://localhost:3000/api/img/games/' + game._id}
+                  alt=""
+                  draggable={false}
+                />
               </div>
               <div className="game-text">
                 <p>{game.title}</p>

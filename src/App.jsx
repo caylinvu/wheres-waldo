@@ -57,12 +57,6 @@ function App() {
 
 export default App;
 
-// update display name on form requirements
-
-// make things not selectable
-// -- make text inside of target and dropdown untargetable
-// -- full image not highlightable
-
 // rearrange header stuff
 // -- add timer and game items to header (access through params - key of game)
 

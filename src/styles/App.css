@@ -131,6 +131,7 @@
 .item img {
   width: 40px;
   border-radius: 50%;
+  user-select: none;
 }
 
 .item img:hover {
@@ -150,6 +151,7 @@
   height: auto;
   cursor: crosshair;
   display: block;
+  user-select: none;
 }
 
 #target-box {
@@ -165,6 +167,7 @@
   vertical-align: middle;
   line-height: 80px;
   cursor: crosshair;
+  user-select: none;
 }
 
 #dropdown {
@@ -181,10 +184,12 @@
   align-items: center;
   gap: 10px;
   width: 150px;
+  user-select: none;
 }
 
 .dropdown-item:hover {
   background-color: rgb(109, 65, 86);
+  transition: background-color 0.5s;
 }
 
 .dropdown-item img {

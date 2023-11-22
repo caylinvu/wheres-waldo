@@ -258,6 +258,7 @@ function GamePage() {
         className="main-img"
         src={'http://localhost:3000/api/img/games/' + state.game._id}
         alt=""
+        draggable={false}
       />
       {alertTimeUp ? null : <div className={'alert ' + alertClass}>{message}</div>}
       <div onClick={hideTargetBox} id="target-box">
@@ -272,7 +273,11 @@ function GamePage() {
               id={'dropdown-item' + item._id}
               onClick={() => handleSelectItem(item)}
             >
-              <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" />
+              <img
+                src={'http://localhost:3000/api/img/items/' + item._id}
+                alt=""
+                draggable={false}
+              />
               <p>{item.name}</p>
             </div>
           );
@@ -283,7 +288,11 @@ function GamePage() {
         {state.game.items.map((item) => {
           return (
             <div key={item._id} className="item" id={'item' + item._id}>
-              <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" />
+              <img
+                src={'http://localhost:3000/api/img/items/' + item._id}
+                alt=""
+                draggable={false}
+              />
               <p>{item.name}</p>
             </div>
           );
