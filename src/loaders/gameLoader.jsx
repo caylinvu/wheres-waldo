@@ -5,7 +5,6 @@ const gameLoader = async () => {
       throw new Error(`This is an HTTP error: The status is ${response.status}`);
     }
     const games = await response.json();
-    console.log(games);
     return { games };
   } catch (err) {
     console.log(err);

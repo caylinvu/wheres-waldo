@@ -59,13 +59,13 @@ function App() {
 
 export default App;
 
-// make game data based off of params instead of passing state through
 // make leaderboard data based off of params also
 // move item/timer components to header and pull info from path
 
 // add error page to router
 
 // Target box/dropdown - break out into functions to show/hide (set to state) MAYBE
+// do target box and dropdown need to be in state??
 
 // reformat time in endpopup
 

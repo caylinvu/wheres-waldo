@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
 import GameImage from '../components/GameImage';
 import TargetBox from '../components/TargetBox';
 import GameItems from '../components/GameItems';
@@ -7,6 +7,9 @@ import GameTimer from '../components/GameTimer';
 import EndPopup from '../components/EndPopup';
 
 function GamePage() {
+  const { games } = useOutletContext();
+  const { gameKey } = useParams();
+  const game = games.find((obj) => obj.key == gameKey);
   const [targetBox, setTargetBox] = useState(null);
   const [dropdown, setDropdown] = useState(null);
   const [currentX, setCurrentX] = useState(null);
@@ -18,7 +21,6 @@ function GamePage() {
   const [alertTimer, setAlertTimer] = useState(null);
   const [gameTimer, setGameTimer] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
-  const { state } = useLocation();
   const [coordRange, setCoordRange] = useState(0);
 
   // Start/stop game timer
@@ -244,20 +246,18 @@ function GamePage() {
 
   return (
     <div className="game-page">
-      <GameImage game={state.game} imgClass="main-img" handleClick={handleClick} />
+      <GameImage game={game} imgClass="main-img" handleClick={handleClick} />
       {alertTimeUp ? null : <div className={'alert ' + alertClass}>{message}</div>}
       <TargetBox hideTargetBox={hideTargetBox} />
       <GameItems
-        items={state.game.items}
+        items={game.items}
         type="dropdown"
         itemClass="dropdown-item"
         handleSelectItem={handleSelectItem}
       />
       <GameTimer gameTimer={gameTimer} />
-      <GameItems items={state.game.items} type="items-to-find" itemClass="item" />
-      {isGameOver && (
-        <EndPopup game={state.game} gameTimer={gameTimer} setGameTimer={setGameTimer} />
-      )}
+      <GameItems items={game.items} type="items-to-find" itemClass="item" />
+      {isGameOver && <EndPopup game={game} gameTimer={gameTimer} setGameTimer={setGameTimer} />}
     </div>
   );
 }

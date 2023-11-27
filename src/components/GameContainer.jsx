@@ -23,11 +23,7 @@ function GameContainer({ page, games, lbGame, setlbGame }) {
             </div>
             <div className="game-text">
               <p>{game.title}</p>
-              {page === 'home' ? (
-                <Link to={'/game/' + game.key} state={{ game: game }}>
-                  Start Game
-                </Link>
-              ) : null}
+              {page === 'home' ? <Link to={'/game/' + game.key}>Start Game</Link> : null}
             </div>
           </div>
         );
