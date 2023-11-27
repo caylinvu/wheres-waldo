@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 function EntryForm({ game, gameTimer, setGameTimer }) {
   const [name, setName] = useState('');
-  const { updateLeaderboard, setUpdateLeaderboard } = useOutletContext();
+  const { updateLeaderboard, setUpdateLeaderboard, setLastlbKey } = useOutletContext();
   const navigate = useNavigate();
 
   // Handle submitting the leaderboard entry form
@@ -23,7 +23,8 @@ function EntryForm({ game, gameTimer, setGameTimer }) {
         setName('');
         setGameTimer(0);
         setUpdateLeaderboard(!updateLeaderboard);
-        navigate('/leaderboard', { state: game });
+        navigate('/leaderboard/' + game.key);
+        // setLastlbKey(game.key);
       }
     } catch (err) {
       console.log(err);

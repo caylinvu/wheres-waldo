@@ -1,26 +1,22 @@
-import { useOutletContext, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useOutletContext, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import GameContainer from '../components/GameContainer';
 import LeaderboardEntries from '../components/LeaderboardEntries';
 
 function LeaderboardPage() {
-  const { games, lbGame, setlbGame, lbEntries } = useOutletContext();
-  // const [gameEntries, setGameEntries] = useState([]);
-  const { state } = useLocation();
+  const { games, setLastlbKey } = useOutletContext();
+  const { lbKey } = useParams();
+  const lbGame = games.find((obj) => obj.key == lbKey);
 
   useEffect(() => {
-    if (state) {
-      setlbGame(state);
-    }
-  }, [state]);
-
-  // maybe set up params on leaderboard so that info can be retrieved more easily
+    setLastlbKey(lbKey);
+  });
 
   return (
     <div className="leaderboard-page">
       <h2 className="lb-title">Leaderboard</h2>
-      <GameContainer page="leaderboard" games={games} lbGame={lbGame} setlbGame={setlbGame} />
-      {lbGame && <LeaderboardEntries lbEntries={lbEntries} lbGame={lbGame} />}
+      <GameContainer page="leaderboard" games={games} lbGame={lbGame} />
+      <LeaderboardEntries lbGame={lbGame} />
     </div>
   );
 }

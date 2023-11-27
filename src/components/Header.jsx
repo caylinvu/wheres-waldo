@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function Header() {
+function Header({ lastlbKey }) {
   const { gameKey } = useParams();
 
   return (
@@ -10,7 +11,7 @@ function Header() {
       </Link>
       {!gameKey ? (
         <div className="nav">
-          <Link to="/leaderboard">
+          <Link to={lastlbKey ? '/leaderboard/' + lastlbKey : '/leaderboard/1'}>
             <p>Leaderboard</p>
           </Link>
           <Link to="/about">
@@ -21,5 +22,9 @@ function Header() {
     </div>
   );
 }
+
+Header.propTypes = {
+  lastlbKey: PropTypes.string,
+};
 
 export default Header;

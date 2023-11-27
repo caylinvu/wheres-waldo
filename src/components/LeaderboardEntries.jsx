@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
+import { useOutletContext } from 'react-router-dom';
 
-function LeaderboardEntries({ lbEntries, lbGame }) {
+function LeaderboardEntries({ lbGame }) {
+  const { lbEntries } = useOutletContext();
   let placeCounter = 1;
 
   return (
@@ -35,7 +37,6 @@ function LeaderboardEntries({ lbEntries, lbGame }) {
 }
 
 LeaderboardEntries.propTypes = {
-  lbEntries: PropTypes.array,
   lbGame: PropTypes.object,
 };
 

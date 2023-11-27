@@ -4,31 +4,10 @@ import { Outlet, useLoaderData } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function App() {
-  // const [games, setGames] = useState([]);
   const [lbEntries, setlbEntries] = useState([]);
-  const [lbGame, setlbGame] = useState(null);
   const [updateLeaderboard, setUpdateLeaderboard] = useState(false);
   const { games } = useLoaderData();
-
-  // useEffect(() => {
-  //   const getGameData = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:3000/api/games');
-  //       if (!response.ok) {
-  //         throw new Error(`This is an HTTP error: The status is ${response.status}`);
-  //       }
-  //       const gameData = await response.json();
-  //       // console.log(gameData);
-  //       setGames(gameData);
-  //       setlbGame(gameData[0]);
-  //     } catch (err) {
-  //       setGames([]);
-  //       setlbGame(null);
-  //       console.log(err);
-  //     }
-  //   };
-  //   getGameData();
-  // }, []);
+  const [lastlbKey, setLastlbKey] = useState(null);
 
   useEffect(() => {
     const getlbData = async () => {
@@ -49,9 +28,9 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header lastlbKey={lastlbKey} />
       <Outlet
-        context={{ games, lbGame, setlbGame, updateLeaderboard, setUpdateLeaderboard, lbEntries }}
+        context={{ games, updateLeaderboard, setUpdateLeaderboard, lbEntries, setLastlbKey }}
       />
     </>
   );
@@ -59,7 +38,6 @@ function App() {
 
 export default App;
 
-// make leaderboard data based off of params also
 // move item/timer components to header and pull info from path
 
 // add error page to router

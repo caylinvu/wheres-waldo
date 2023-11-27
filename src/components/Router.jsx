@@ -15,7 +15,7 @@ function Router() {
       children: [
         { path: '/', element: <HomePage /> },
         { path: '/game/:gameKey', element: <GamePage /> },
-        { path: '/leaderboard', element: <LeaderboardPage /> },
+        { path: '/leaderboard/:lbKey', element: <LeaderboardPage /> },
         { path: '/about', element: <AboutPage /> },
       ],
     },

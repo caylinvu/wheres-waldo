@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GameImage from './GameImage';
 
-function GameContainer({ page, games, lbGame, setlbGame }) {
+function GameContainer({ page, games, lbGame }) {
+  const navigate = useNavigate();
+
   return (
     <div className="game-container">
       {games.map((game) => {
@@ -16,7 +18,7 @@ function GameContainer({ page, games, lbGame, setlbGame }) {
                   : 'lb-games'
                 : ''
             }
-            onClick={page === 'leaderboard' ? () => setlbGame(game) : null}
+            onClick={page === 'leaderboard' ? () => navigate('/leaderboard/' + game.key) : null}
           >
             <div className="game-img">
               <GameImage game={game} />
@@ -36,7 +38,6 @@ GameContainer.propTypes = {
   page: PropTypes.string,
   games: PropTypes.array,
   lbGame: PropTypes.object,
-  setlbGame: PropTypes.func,
 };
 
 export default GameContainer;
