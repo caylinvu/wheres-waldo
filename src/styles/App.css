@@ -17,11 +17,13 @@
   z-index: 10;
   position: fixed;
   width: 100%;
+  gap: 10px;
 }
 
 .header h1 {
   font-size: 24px;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .nav {
@@ -104,22 +106,13 @@
 /* ~~~~~~~~~~ IN GAME HEADER~~~~~~~~~~ */
 
 .game-timer {
-  position: fixed;
-  top: 0;
-  left: 400px;
-  padding: 29px 0;
-  z-index: 15;
   font-size: 20px;
+  padding-right: 10px;
 }
 
 #items-to-find {
   display: flex;
   gap: 20px;
-  position: fixed;
-  padding: 20px 25px;
-  top: 0;
-  right: 0;
-  z-index: 15;
 }
 
 .item {

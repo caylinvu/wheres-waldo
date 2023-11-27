@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useState } from 'react';
 
-function EntryForm({ game, gameTimer, setGameTimer }) {
+function EntryForm({ game, gameTimer }) {
   const [name, setName] = useState('');
-  const { updateLeaderboard, setUpdateLeaderboard, setLastlbKey } = useOutletContext();
+  const { updateLeaderboard, setUpdateLeaderboard } = useOutletContext();
   const navigate = useNavigate();
 
   // Handle submitting the leaderboard entry form
@@ -21,10 +21,8 @@ function EntryForm({ game, gameTimer, setGameTimer }) {
       });
       if (response.status === 200) {
         setName('');
-        setGameTimer(0);
         setUpdateLeaderboard(!updateLeaderboard);
         navigate('/leaderboard/' + game.key);
-        // setLastlbKey(game.key);
       }
     } catch (err) {
       console.log(err);
@@ -57,7 +55,6 @@ function EntryForm({ game, gameTimer, setGameTimer }) {
 EntryForm.propTypes = {
   game: PropTypes.object,
   gameTimer: PropTypes.number,
-  setGameTimer: PropTypes.func,
 };
 
 export default EntryForm;

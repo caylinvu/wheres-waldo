@@ -1,8 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GameImage from './GameImage';
 
 function GameContainer({ page, games, lbGame }) {
+  const { setGameTimer } = useOutletContext();
   const navigate = useNavigate();
 
   return (
@@ -25,7 +26,11 @@ function GameContainer({ page, games, lbGame }) {
             </div>
             <div className="game-text">
               <p>{game.title}</p>
-              {page === 'home' ? <Link to={'/game/' + game.key}>Start Game</Link> : null}
+              {page === 'home' ? (
+                <Link to={'/game/' + game.key} onClick={() => setGameTimer(0)}>
+                  Start Game
+                </Link>
+              ) : null}
             </div>
           </div>
         );

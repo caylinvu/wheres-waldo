@@ -8,6 +8,7 @@ function App() {
   const [updateLeaderboard, setUpdateLeaderboard] = useState(false);
   const { games } = useLoaderData();
   const [lastlbKey, setLastlbKey] = useState(null);
+  const [gameTimer, setGameTimer] = useState(0);
 
   useEffect(() => {
     const getlbData = async () => {
@@ -28,9 +29,17 @@ function App() {
 
   return (
     <>
-      <Header lastlbKey={lastlbKey} />
+      <Header games={games} lastlbKey={lastlbKey} gameTimer={gameTimer} />
       <Outlet
-        context={{ games, updateLeaderboard, setUpdateLeaderboard, lbEntries, setLastlbKey }}
+        context={{
+          games,
+          updateLeaderboard,
+          setUpdateLeaderboard,
+          lbEntries,
+          setLastlbKey,
+          gameTimer,
+          setGameTimer,
+        }}
       />
     </>
   );

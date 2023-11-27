@@ -3,11 +3,10 @@ import { useOutletContext, useParams } from 'react-router-dom';
 import GameImage from '../components/GameImage';
 import TargetBox from '../components/TargetBox';
 import GameItems from '../components/GameItems';
-import GameTimer from '../components/GameTimer';
 import EndPopup from '../components/EndPopup';
 
 function GamePage() {
-  const { games } = useOutletContext();
+  const { games, gameTimer, setGameTimer } = useOutletContext();
   const { gameKey } = useParams();
   const game = games.find((obj) => obj.key == gameKey);
   const [targetBox, setTargetBox] = useState(null);
@@ -19,7 +18,7 @@ function GamePage() {
   const [alertClass, setAlertClass] = useState('');
   const [alertTimeUp, setAlertTimeUp] = useState(true);
   const [alertTimer, setAlertTimer] = useState(null);
-  const [gameTimer, setGameTimer] = useState(0);
+  // const [gameTimer, setGameTimer] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [coordRange, setCoordRange] = useState(0);
 
@@ -255,9 +254,9 @@ function GamePage() {
         itemClass="dropdown-item"
         handleSelectItem={handleSelectItem}
       />
-      <GameTimer gameTimer={gameTimer} />
-      <GameItems items={game.items} type="items-to-find" itemClass="item" />
-      {isGameOver && <EndPopup game={game} gameTimer={gameTimer} setGameTimer={setGameTimer} />}
+      {/* <GameTimer gameTimer={gameTimer} />
+      <GameItems items={game.items} type="items-to-find" itemClass="item" /> */}
+      {isGameOver && <EndPopup game={game} gameTimer={gameTimer} />}
     </div>
   );
 }

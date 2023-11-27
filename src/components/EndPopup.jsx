@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import EntryForm from './EntryForm';
 
-function EndPopup({ game, gameTimer, setGameTimer }) {
+function EndPopup({ game, gameTimer }) {
   return (
     <div className="popup-container">
       <div className="blocker"></div>
@@ -9,7 +9,7 @@ function EndPopup({ game, gameTimer, setGameTimer }) {
         <div className="end-popup">
           <p className="timer-text">{'You finished in ' + gameTimer + 's!'}</p>
           <p>Submit your score to the leaderboard</p>
-          <EntryForm game={game} gameTimer={gameTimer} setGameTimer={setGameTimer} />
+          <EntryForm game={game} gameTimer={gameTimer} />
         </div>
       </div>
     </div>
@@ -19,7 +19,6 @@ function EndPopup({ game, gameTimer, setGameTimer }) {
 EndPopup.propTypes = {
   game: PropTypes.object,
   gameTimer: PropTypes.number,
-  setGameTimer: PropTypes.func,
 };
 
 export default EndPopup;
