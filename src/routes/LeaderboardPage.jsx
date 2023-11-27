@@ -1,7 +1,7 @@
 import { useOutletContext, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import GameContainer from './GameContainer';
-import LeaderboardEntries from './LeaderboardEntries';
+import GameContainer from '../components/GameContainer';
+import LeaderboardEntries from '../components/LeaderboardEntries';
 
 function LeaderboardPage() {
   const { games, lbGame, setlbGame, lbEntries } = useOutletContext();

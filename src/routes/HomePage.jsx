@@ -1,5 +1,5 @@
 import { useOutletContext } from 'react-router-dom';
-import GameContainer from './GameContainer';
+import GameContainer from '../components/GameContainer';
 
 function HomePage() {
   const { games } = useOutletContext();

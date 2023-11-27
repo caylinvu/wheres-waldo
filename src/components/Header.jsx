@@ -1,14 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function Header() {
-  const location = useLocation();
+  const { gameKey } = useParams();
 
   return (
     <div className="header">
       <Link to="/">
         <h1>Find the Things!</h1>
       </Link>
-      {!location.pathname.includes('/game') ? (
+      {!gameKey ? (
         <div className="nav">
           <Link to="/leaderboard">
             <p>Leaderboard</p>

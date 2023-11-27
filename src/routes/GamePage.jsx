@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import GameImage from './GameImage';
-import TargetBox from './TargetBox';
-import GameItems from './GameItems';
-import GameTimer from './GameTimer';
-import EndPopup from './EndPopup';
+import GameImage from '../components/GameImage';
+import TargetBox from '../components/TargetBox';
+import GameItems from '../components/GameItems';
+import GameTimer from '../components/GameTimer';
+import EndPopup from '../components/EndPopup';
 
 function GamePage() {
   const [targetBox, setTargetBox] = useState(null);
