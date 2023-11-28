@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-function GameItems({ items, type, itemClass, handleSelectItem }) {
+function GameItems({ items, type, itemClass, handleSelectItem, dropdownLeft, dropdownTop }) {
   return (
-    <div id={type}>
+    <div id={type} style={type === 'dropdown' ? { left: dropdownLeft, top: dropdownTop } : null}>
       {items.map((item) => {
         return (
           <div
@@ -25,6 +25,8 @@ GameItems.propTypes = {
   type: PropTypes.string,
   itemClass: PropTypes.string,
   handleSelectItem: PropTypes.func,
+  dropdownLeft: PropTypes.string,
+  dropdownTop: PropTypes.string,
 };
 
 export default GameItems;

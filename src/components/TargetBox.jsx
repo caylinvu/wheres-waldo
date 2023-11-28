@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-function TargetBox({ hideTargetBox }) {
+function TargetBox({ hideTargetBox, targetBoxLeft, targetBoxTop }) {
   return (
-    <div onClick={hideTargetBox} id="target-box">
+    <div onClick={hideTargetBox} id="target-box" style={{ left: targetBoxLeft, top: targetBoxTop }}>
       •
     </div>
   );
@@ -10,6 +10,8 @@ function TargetBox({ hideTargetBox }) {
 
 TargetBox.propTypes = {
   hideTargetBox: PropTypes.func,
+  targetBoxLeft: PropTypes.string,
+  targetBoxTop: PropTypes.string,
 };
 
 export default TargetBox;
