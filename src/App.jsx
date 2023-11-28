@@ -47,15 +47,6 @@ function App() {
 
 export default App;
 
-// Target box/dropdown - break out into functions to show/hide (set to state) MAYBE
-// create state to show target box & dropdown
-// replace style changes with changing state
-// create state to hold dropdown top, dropdown left, targetbox top, and targetbox left styles
-// replace style changes with changing state and implement in jsx return
-// edit css to not show display as none
-
-// clean up code on game page
-
 // credit image artist!!!
 
 // make scroll to top when change route
