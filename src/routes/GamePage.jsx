@@ -18,7 +18,6 @@ function GamePage() {
   const [alertClass, setAlertClass] = useState('');
   const [alertTimeUp, setAlertTimeUp] = useState(true);
   const [alertTimer, setAlertTimer] = useState(null);
-  // const [gameTimer, setGameTimer] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [coordRange, setCoordRange] = useState(0);
 
@@ -33,7 +32,7 @@ function GamePage() {
     }
 
     return () => clearInterval(interval);
-  }, [gameTimer, isGameOver]);
+  }, [gameTimer, setGameTimer, isGameOver]);
 
   // Assign target box and dropdown to state variables so they can be manipulated on clicks
   useEffect(() => {
@@ -254,8 +253,6 @@ function GamePage() {
         itemClass="dropdown-item"
         handleSelectItem={handleSelectItem}
       />
-      {/* <GameTimer gameTimer={gameTimer} />
-      <GameItems items={game.items} type="items-to-find" itemClass="item" /> */}
       {isGameOver && <EndPopup game={game} gameTimer={gameTimer} />}
     </div>
   );

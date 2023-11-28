@@ -47,18 +47,13 @@ function App() {
 
 export default App;
 
-// move item/timer components to header and pull info from path
-
-// add error page to router
-
 // Target box/dropdown - break out into functions to show/hide (set to state) MAYBE
-// do target box and dropdown need to be in state??
-
-// reformat time in endpopup
 
 // credit image artist!!!
 
 // make scroll to top when change route
+
+// add error page to router
 
 // add footer????
 
