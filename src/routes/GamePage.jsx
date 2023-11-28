@@ -40,18 +40,6 @@ function GamePage() {
     setDropdown(document.getElementById('dropdown'));
   }, []);
 
-  // const showCoords = (e) => {
-  //   const x = e.pageX - e.target.offsetLeft;
-  //   const y = e.pageY - e.target.offsetTop;
-  //   const actualX = Math.round((x / e.target.width) * e.target.naturalWidth);
-  //   const actualY = Math.round((y / e.target.height) * e.target.naturalHeight);
-
-  //   console.log('img coords: ' + x + ', ' + y);
-  //   console.log('img: ' + e.target.width + ', ' + e.target.height);
-  //   console.log('actual coords: ' + actualX + ', ' + actualY);
-  //   console.log('natural: ' + e.target.naturalWidth + ', ' + e.target.naturalHeight);
-  // };
-
   // Convert coord to placement in natural image
   const convertToNat = (coord, dimension, natDimension) => {
     return Math.round((coord / dimension) * natDimension);
@@ -159,8 +147,6 @@ function GamePage() {
       // Hide target box and dropdown if already displayed when clicking
       hideTargetBox();
     }
-
-    // showCoords(e);
   };
 
   // Hide target box and dropdown

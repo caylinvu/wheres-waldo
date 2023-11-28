@@ -49,6 +49,8 @@ export default App;
 
 // Target box/dropdown - break out into functions to show/hide (set to state) MAYBE
 
+// clean up code on game page
+
 // credit image artist!!!
 
 // make scroll to top when change route
@@ -58,3 +60,4 @@ export default App;
 // add footer????
 
 // make responsive!!!
+// show ellipses for long names when screen is small
