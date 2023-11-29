@@ -49,9 +49,8 @@ function App() {
 
 export default App;
 
-// make responsive!!!
-// in game header
-// maybe game container
+// make leaderboard not jump to top if the screen is small
+// close menus if click somewhere in window
 
 // publish backend
 
