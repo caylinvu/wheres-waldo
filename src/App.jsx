@@ -1,4 +1,5 @@
 import './styles/App.css';
+import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header';
 import { Outlet, useLoaderData } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Header games={games} lastlbKey={lastlbKey} gameTimer={gameTimer} />
       <Outlet
         context={{
@@ -46,10 +48,6 @@ function App() {
 }
 
 export default App;
-
-// credit image artist!!!
-
-// make scroll to top when change route
 
 // add error page to router
 
