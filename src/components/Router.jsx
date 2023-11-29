@@ -1,6 +1,7 @@
 import App from '../App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import gameLoader from '../loaders/gameLoader';
+import ErrorPage from './ErrorPage';
 import HomePage from '../routes/HomePage';
 import GamePage from '../routes/GamePage';
 import LeaderboardPage from '../routes/LeaderboardPage';
@@ -11,6 +12,7 @@ function Router() {
     {
       path: '/',
       element: <App />,
+      errorElement: <ErrorPage />,
       loader: gameLoader,
       children: [
         { path: '/', element: <HomePage /> },

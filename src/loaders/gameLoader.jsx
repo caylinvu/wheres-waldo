@@ -7,7 +7,7 @@ const gameLoader = async () => {
     const games = await response.json();
     return { games };
   } catch (err) {
-    console.log(err);
+    throw new Error('Failed to fetch game data');
   }
 };
 

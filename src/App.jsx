@@ -22,7 +22,7 @@ function App() {
         setlbEntries(lbData);
       } catch (err) {
         setlbEntries([]);
-        console.log(err);
+        throw new Error('Failed to fetch leaderboard data');
       }
     };
     getlbData();
@@ -50,8 +50,6 @@ function App() {
 export default App;
 
 // add error page to router
-
-// add footer????
 
 // make responsive!!!
 // --mostly header

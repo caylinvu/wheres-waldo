@@ -422,3 +422,14 @@ td {
   width: 23px;
   filter: invert(75%) sepia(28%) saturate(603%) hue-rotate(203deg) brightness(103%) contrast(105%);
 }
+
+/* ~~~~~~~~~~ERROR PAGE~~~~~~~~~~ */
+
+#error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 10px;
+  gap: 30px;
+  font-size: 18px;
+}
