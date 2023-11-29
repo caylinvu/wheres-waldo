@@ -1,5 +1,5 @@
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import GameTimer from './GameTimer';
 import GameItems from './GameItems';
