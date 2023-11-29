@@ -49,10 +49,9 @@ function App() {
 
 export default App;
 
-// add error page to router
-
 // make responsive!!!
-// --mostly header
+// in game header
+// maybe game container
 
 // publish backend
 

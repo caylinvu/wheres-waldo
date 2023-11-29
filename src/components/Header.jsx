@@ -1,4 +1,5 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import GameTimer from './GameTimer';
 import GameItems from './GameItems';
@@ -6,6 +7,24 @@ import GameItems from './GameItems';
 function Header({ games, lastlbKey, gameTimer }) {
   const { gameKey } = useParams();
   const game = games.find((obj) => obj.key == gameKey);
+  const [showMenu, setShowMenu] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setShowMenu(false);
+    });
+
+    return () => {
+      window.removeEventListener('resize', () => {
+        setShowMenu(false);
+      });
+    };
+  });
+
+  useEffect(() => {
+    setShowMenu(false);
+  }, [location]);
 
   return (
     <div className="header">
@@ -13,14 +32,19 @@ function Header({ games, lastlbKey, gameTimer }) {
         <h1>Find the Things!</h1>
       </Link>
       {!gameKey ? (
-        <div className="nav">
-          <Link to={lastlbKey ? '/leaderboard/' + lastlbKey : '/leaderboard/1'}>
-            <p>Leaderboard</p>
-          </Link>
-          <Link to="/about">
-            <p>About</p>
-          </Link>
-        </div>
+        <>
+          <div className={showMenu ? 'nav show' : 'nav'}>
+            <Link to={lastlbKey ? '/leaderboard/' + lastlbKey : '/leaderboard/1'}>
+              <p>Leaderboard</p>
+            </Link>
+            <Link to="/about">
+              <p>About</p>
+            </Link>
+          </div>
+          <button className="menu-btn" onClick={() => setShowMenu(!showMenu)}>
+            <img src="/menu.svg" alt="" />
+          </button>
+        </>
       ) : (
         <>
           <GameTimer gameTimer={gameTimer} />
