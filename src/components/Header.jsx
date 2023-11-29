@@ -1,5 +1,5 @@
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import GameTimer from './GameTimer';
 import GameItems from './GameItems';
@@ -11,8 +11,7 @@ function Header({ games, lastlbKey, gameTimer }) {
   const [showItems, setShowItems] = useState(false);
   const location = useLocation();
 
-  // maybe close menus on window click too???
-
+  // Close menus if window is resized
   useEffect(() => {
     window.addEventListener('resize', () => {
       setShowMenu(false);
@@ -27,10 +26,19 @@ function Header({ games, lastlbKey, gameTimer }) {
     };
   });
 
+  // Close menus if route changes
   useEffect(() => {
     setShowMenu(false);
     setShowItems(false);
   }, [location]);
+
+  // Close menus when clicking on page outside of menu
+  const handleCloseDropdown = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setShowMenu(false);
+      setShowItems(false);
+    }
+  };
 
   return (
     <div className="header">
@@ -38,7 +46,7 @@ function Header({ games, lastlbKey, gameTimer }) {
         <h1>Find the Things!</h1>
       </Link>
       {!gameKey ? (
-        <>
+        <div onBlur={(e) => handleCloseDropdown(e)}>
           <div className={showMenu ? 'nav show' : 'nav'}>
             <Link to={lastlbKey ? '/leaderboard/' + lastlbKey : '/leaderboard/1'}>
               <p>Leaderboard</p>
@@ -50,17 +58,19 @@ function Header({ games, lastlbKey, gameTimer }) {
           <button className="menu-btn" onClick={() => setShowMenu(!showMenu)}>
             <img src="/menu.svg" alt="" />
           </button>
-        </>
+        </div>
       ) : (
         <>
           <GameTimer gameTimer={gameTimer} />
-          <GameItems
-            items={game.items}
-            type="items-to-find"
-            divClass={showItems ? 'show' : null}
-            itemClass="item"
-          />
-          <div id="item-count" onClick={() => setShowItems(!showItems)}></div>
+          <div onBlur={(e) => handleCloseDropdown(e)}>
+            <GameItems
+              items={game.items}
+              type="items-to-find"
+              divClass={showItems ? 'show' : null}
+              itemClass="item"
+            />
+            <div id="item-count" onClick={() => setShowItems(!showItems)} tabIndex={0}></div>
+          </div>
         </>
       )}
     </div>

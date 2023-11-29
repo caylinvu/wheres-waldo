@@ -532,7 +532,7 @@ td {
   .nav {
     position: absolute;
     top: 60px;
-    right: 20px;
+    right: 25px;
     flex-direction: column;
     display: none;
     background-color: rgb(66, 37, 52);

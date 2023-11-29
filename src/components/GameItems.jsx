@@ -14,6 +14,7 @@ function GameItems({
       id={type}
       className={type === 'items-to-find' ? divClass : null}
       style={type === 'dropdown' ? { left: dropdownLeft, top: dropdownTop } : null}
+      tabIndex={0}
     >
       {items.map((item) => {
         return (
