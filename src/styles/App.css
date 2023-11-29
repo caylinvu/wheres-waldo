@@ -19,6 +19,7 @@
   width: 100%;
   gap: 10px;
   box-shadow: 0 1px 15px rgb(66, 37, 52);
+  height: 82px;
 }
 
 .header h1 {
@@ -48,7 +49,7 @@
 
 .home-page {
   text-align: center;
-  margin: 0 10px 20px;
+  margin: 0 10px 30px;
 }
 
 .home-page h2 {
@@ -322,7 +323,7 @@
 
 .leaderboard-page {
   text-align: center;
-  margin: 0 10px 20px;
+  margin: 0 10px 30px;
 }
 
 .lb-games {
@@ -382,7 +383,7 @@ td {
 .about-page {
   text-align: center;
   font-size: 18px;
-  margin: 0 10px 20px;
+  margin: 0 10px 30px;
 }
 
 .about-page a {
@@ -441,9 +442,90 @@ td {
   display: none;
 }
 
+#item-count {
+  display: none;
+}
+
+@media (max-width: 1055px) {
+  #items-to-find {
+    position: absolute;
+    top: 60px;
+    right: 38px;
+    flex-direction: column;
+    display: none;
+    background-color: rgb(66, 37, 52);
+    border-radius: 7px;
+    box-shadow: 0 0 10px rgb(66, 37, 52);
+    overflow: hidden;
+    gap: 0;
+  }
+
+  .item {
+    padding: 7px 10px;
+    width: 150px;
+  }
+
+  .item:hover {
+    background-color: rgb(109, 65, 86);
+    transition: background-color 0.5s;
+  }
+
+  .item img {
+    width: 50px;
+  }
+
+  .item img:hover {
+    transform: none;
+    transition: none;
+  }
+
+  #items-to-find.show {
+    display: flex;
+  }
+
+  #item-count {
+    display: block;
+    font-size: 18px;
+    background-color: rgb(206, 168, 255);
+    color: rgb(87, 52, 69);
+    font-weight: 500;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+  }
+
+  #item-count:hover {
+    background-color: rgb(175, 146, 214);
+    transition: background-color 0.5s;
+  }
+}
+
 @media (max-width: 525px) {
   .header {
-    padding: 15px;
+    padding: 20px 10px;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .game-timer {
+    font-size: 18px;
+  }
+
+  #items-to-find {
+    top: 57px;
+    right: 20px;
+  }
+
+  #item-count {
+    font-size: 17px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
   }
 
   .nav {

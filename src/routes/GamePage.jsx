@@ -169,8 +169,12 @@ function GamePage() {
       currentY < item.coords.y + coordRange
     ) {
       // Mark game item in header as found (to update style)
-      const element = document.getElementById('item' + item._id);
-      element.classList.add('found');
+      const headerItem = document.getElementById('item' + item._id);
+      headerItem.classList.add('found');
+
+      // // Update item count in header to match remaining items
+      // const itemCount = document.getElementById('item-count');
+      // itemCount.textContent = remainingItems.length - 1;
 
       // Remove found item from remaining items to find
       const items = remainingItems.filter((obj) => obj._id != item._id);
@@ -214,11 +218,17 @@ function GamePage() {
 
   // Reset the animation for the alert notification
   const resetAnimation = () => {
-    const element = document.querySelector('.alert');
-    element.style.animation = 'none';
-    element.offsetHeight;
-    element.style.animation = null;
+    const alert = document.querySelector('.alert');
+    alert.style.animation = 'none';
+    alert.offsetHeight;
+    alert.style.animation = null;
   };
+
+  // Update item count in header to match remaining items
+  useEffect(() => {
+    const itemCount = document.getElementById('item-count');
+    itemCount.textContent = remainingItems.length;
+  }, [remainingItems]);
 
   // Check if game is over
   useEffect(() => {

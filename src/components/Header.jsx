@@ -8,22 +8,28 @@ function Header({ games, lastlbKey, gameTimer }) {
   const { gameKey } = useParams();
   const game = games.find((obj) => obj.key == gameKey);
   const [showMenu, setShowMenu] = useState(false);
+  const [showItems, setShowItems] = useState(false);
   const location = useLocation();
+
+  // maybe close menus on window click too???
 
   useEffect(() => {
     window.addEventListener('resize', () => {
       setShowMenu(false);
+      setShowItems(false);
     });
 
     return () => {
       window.removeEventListener('resize', () => {
         setShowMenu(false);
+        setShowItems(false);
       });
     };
   });
 
   useEffect(() => {
     setShowMenu(false);
+    setShowItems(false);
   }, [location]);
 
   return (
@@ -48,7 +54,13 @@ function Header({ games, lastlbKey, gameTimer }) {
       ) : (
         <>
           <GameTimer gameTimer={gameTimer} />
-          <GameItems items={game.items} type="items-to-find" itemClass="item" />
+          <GameItems
+            items={game.items}
+            type="items-to-find"
+            divClass={showItems ? 'show' : null}
+            itemClass="item"
+          />
+          <div id="item-count" onClick={() => setShowItems(!showItems)}></div>
         </>
       )}
     </div>
