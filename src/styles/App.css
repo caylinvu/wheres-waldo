@@ -378,8 +378,47 @@ td {
 
 /* ~~~~~~~~~~ABOUT PAGE~~~~~~~~~~ */
 
+.about-page {
+  text-align: center;
+  font-size: 18px;
+  margin: 0 10px 20px;
+}
+
+.about-page a {
+  color: #d0ccff;
+}
+
 .about-page h1 {
   font-weight: 500;
   margin: 25px 0;
   font-size: 28px;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: auto;
+}
+
+.about-txt,
+.img-txt {
+  padding-bottom: 50px;
+}
+
+.gh-txt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding-bottom: 25px;
+}
+
+.gh-txt a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.gh-txt img {
+  width: 23px;
+  filter: invert(75%) sepia(28%) saturate(603%) hue-rotate(203deg) brightness(103%) contrast(105%);
 }

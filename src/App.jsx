@@ -56,7 +56,7 @@ export default App;
 // add footer????
 
 // make responsive!!!
-// show ellipses for long names when screen is small
+// --mostly header
 
 // publish backend
 
