@@ -2,6 +2,8 @@
 
 A game, similar to Where's Waldo, where the user is given a large image which contains several elements to find
 
+Live: https://wheres-waldo-alpha.vercel.app/
+
 ## Features
 - 3 different game modes (different images)
 - Each game mode's image has 3 unique items that the user must locate
@@ -17,3 +19,6 @@ A game, similar to Where's Waldo, where the user is given a large image which co
 
 ## Image Credit
 - All 3 images (The Crumbling Creek, Midnight Metropolis, and Concrete Jungle) by Samuel Hayward (https://www.srhillustration.com/)
+
+## Related Links
+- Backend repo: https://github.com/caylinvu/wheres-waldo-api
