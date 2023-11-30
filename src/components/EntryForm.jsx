@@ -11,14 +11,17 @@ function EntryForm({ game, gameTimer }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/games/' + game._id + '/entries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: name,
-          seconds: gameTimer,
-        }),
-      });
+      const response = await fetch(
+        'https://wheres-waldo-api-production.up.railway.app/api/games/' + game._id + '/entries',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            seconds: gameTimer,
+          }),
+        },
+      );
       if (response.status === 200) {
         setName('');
         setUpdateLeaderboard(!updateLeaderboard);
