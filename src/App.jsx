@@ -15,7 +15,9 @@ function App() {
   useEffect(() => {
     const getlbData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/entries');
+        const response = await fetch(
+          'https://wheres-waldo-api-production.up.railway.app/api/entries',
+        );
         if (!response.ok) {
           throw new Error(`This is an HTTP error: The status is ${response.status}`);
         }
@@ -51,9 +53,3 @@ function App() {
 }
 
 export default App;
-
-// make leaderboard not jump to top if the screen is small
-
-// publish backend
-
-// publish frontend

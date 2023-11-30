@@ -1,6 +1,6 @@
 const gameLoader = async () => {
   try {
-    const response = await fetch('http://localhost:3000/api/games');
+    const response = await fetch('https://wheres-waldo-api-production.up.railway.app/api/games');
     if (!response.ok) {
       throw new Error(`This is an HTTP error: The status is ${response.status}`);
     }

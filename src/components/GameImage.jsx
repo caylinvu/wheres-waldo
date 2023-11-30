@@ -5,7 +5,7 @@ function GameImage({ game, imgClass, handleClick }) {
     <img
       onClick={handleClick ? handleClick : null}
       className={imgClass ? imgClass : null}
-      src={'http://localhost:3000/api/img/games/' + game._id}
+      src={'https://wheres-waldo-api-production.up.railway.app/api/img/games/' + game._id}
       alt=""
       draggable={false}
     />

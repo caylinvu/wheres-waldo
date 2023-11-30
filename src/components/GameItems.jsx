@@ -24,7 +24,11 @@ function GameItems({
             id={itemClass + item._id}
             onClick={type === 'dropdown' ? () => handleSelectItem(item) : null}
           >
-            <img src={'http://localhost:3000/api/img/items/' + item._id} alt="" draggable={false} />
+            <img
+              src={'https://wheres-waldo-api-production.up.railway.app/api/img/items/' + item._id}
+              alt=""
+              draggable={false}
+            />
             <p>{item.name}</p>
           </div>
         );
