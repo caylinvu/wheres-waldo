@@ -9,6 +9,7 @@ function App() {
   const [updateLeaderboard, setUpdateLeaderboard] = useState(false);
   const { games } = useLoaderData();
   const [lastlbKey, setLastlbKey] = useState(null);
+  const [prevPath, setPrevPath] = useState(null);
   const [gameTimer, setGameTimer] = useState(0);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <>
-      <ScrollToTop />
+      <ScrollToTop prevPath={prevPath} setPrevPath={setPrevPath} />
       <Header games={games} lastlbKey={lastlbKey} gameTimer={gameTimer} />
       <Outlet
         context={{
@@ -41,6 +42,8 @@ function App() {
           setLastlbKey,
           gameTimer,
           setGameTimer,
+          prevPath,
+          setPrevPath,
         }}
       />
     </>
@@ -50,7 +53,6 @@ function App() {
 export default App;
 
 // make leaderboard not jump to top if the screen is small
-// close menus if click somewhere in window
 
 // publish backend
 
